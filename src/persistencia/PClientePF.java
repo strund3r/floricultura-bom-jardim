@@ -5,7 +5,8 @@
  */
 package persistencia;
 
-import entidade.Cliente;
+import entidade.ClientePF;
+import entidade.TipoCliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,17 +21,16 @@ import java.util.logging.Logger;
  *
  * @author leticiasilva
  */
-public class PCliente {
-
+public class PClientePF {
 
     Connection cnn = util.Conexao.getConexao();
 
-    public void incluir(Cliente parametro) throws SQLException {
+    public void incluir(ClientePF parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " associado (nome, cpf, telefone, endereco, email, id_cliente) "
-                + " VALUES (?,?,?,?,?, ?)";
+                + " clientePF (nome, cpf, telefone, endereco, email, id_clientePF) "
+                + " VALUES (?,?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -44,23 +44,23 @@ public class PCliente {
         prd.setString(3, parametro.getTelefone());
         prd.setString(4, parametro.getEndereco());
         prd.setString(5, parametro.getEmail());
-        prd.setObject(6, parametro.getCliente().getIdentificador());
+        prd.setObject(6, parametro.getTipoCliente().getIdentificador());
 
         prd.execute();
         cnn.close();
     }
 
-    public void alterar(Cliente parametro) throws SQLException {
+    public void alterar(ClientePF parametro) throws SQLException {
 
         try {
             //Cria a instrução sql para a inserção de registros
-            String sql = "UPDATE associado SET"
+            String sql = "UPDATE clientePF SET"
                     + " nome = ?,"
                     + " cpf = ?, "
                     + " telefone = ?, "
                     + " endereco = ?, "
-                    + " email"
-                    + "identificador"
+                    + " email = ?"
+                    + " identificador = ?"
                     + " WHERE identificador = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -75,19 +75,19 @@ public class PCliente {
             prd.setString(3, parametro.getTelefone());
             prd.setString(4, parametro.getEndereco());
             prd.setString(5, parametro.getEmail());
-            prd.setObject(6, parametro.getCliente().getIdentificador());
+            prd.setObject(6, parametro.getTipoCliente().getIdentificador());
 
             prd.execute();
             cnn.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(PCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PClientePF.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
-        String sql = "DELETE FROM cliente "
+        String sql = "DELETE FROM clientePF "
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -102,11 +102,11 @@ public class PCliente {
         prd.execute();
         cnn.close();
     }
-    
-    public Cliente consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, endereco, telefone, id_tipoassociado"
-                + " FROM associado WHERE identificador = ?;";
+    public ClientePF consultar(int parametro) throws SQLException {
+
+        String sql = "SELECT identificador, nome, endereco, telefone, id_tipoClientePF"
+                + " FROM clientePF WHERE identificador = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -115,45 +115,39 @@ public class PCliente {
 
         ResultSet rs = prd.executeQuery();
 
-        Cliente retorno = new Cliente();
+        ClientePF retorno = new ClientePF();
 
         if (rs.next()) {
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
-            retorno.setCliente(new PCliente().consultar(rs.getInt("id_cliente")));
+            retorno.setTipoCliente(new PTipoCliente().consultar(rs.getInt("id_tipoClientePF")));
         }
         return retorno;
     }
-    
-    public List<Cliente> listar() throws SQLException {
 
-        String sql = "SELECT * FROM associado";
+    public List<ClientePF> listar() throws SQLException {
 
+        String sql = "SELECT * FROM clientePF";
         Connection cnn = util.Conexao.getConexao();
-
         Statement st = cnn.createStatement();
-
         ResultSet rs = st.executeQuery(sql);
-
-        List<Cliente> retorno = new ArrayList<>();
+        List<ClientePF> retorno = new ArrayList<>();
 
         while (rs.next()) {
-            Cliente associado = new Cliente();
+            ClientePF clientePF = new ClientePF();
 
-            associado.setIdentificador(rs.getInt("identificador"));
-            associado.setNome(rs.getString("nome"));
-            associado.setEndereco(rs.getString("endereco"));
-            associado.setTelefone(rs.getString("telefone"));
-            Cliente tpa = new Cliente();
-            tpa.setIdentificador(rs.getInt("id_tipoassociado"));
-            associado.setCliente(tpa);
-            
-            retorno.add(associado);
+            clientePF.setIdentificador(rs.getInt("identificador"));
+            clientePF.setNome(rs.getString("nome"));
+            clientePF.setEndereco(rs.getString("endereco"));
+            clientePF.setTelefone(rs.getString("telefone"));
+            TipoCliente tpcliente = new TipoCliente();
+            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));
+            clientePF.setTipoCliente(tpcliente);
+
+            retorno.add(clientePF);
         }
         return retorno;
     }
 }
-
-

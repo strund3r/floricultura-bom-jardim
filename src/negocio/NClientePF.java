@@ -5,24 +5,24 @@
  */
 package negocio;
 
-import entidade.Produto;
+import entidade.ClientePF;
 import java.sql.SQLException;
 import java.util.List;
-import persistencia.PProduto;
+import persistencia.PClientePF;
 
 /**
  *
  * @author leticiasilva
  */
-public class NProduto {
-    
-     PProduto persistencia;
+public class NClientePF {
 
-    public NProduto() {
-        this.persistencia = new PProduto();
+    PClientePF persistencia;
+
+    public NClientePF() {
+        this.persistencia = new PClientePF();
     }
 
-    public void salvar(Produto parametro) throws SQLException, Exception {
+    public void salvar(ClientePF parametro) throws SQLException, Exception {
 
 //        NTipoAssociado ntp = new NTipoAssociado();
 //
@@ -30,16 +30,16 @@ public class NProduto {
 //        //instancia novo objeto do tipo associado
 //        Associado associado = new Associado();
         if (parametro.getNome().isEmpty()) {
-            throw new Exception("Ë necessário informar o nome do produto!");
+            throw new Exception("Ë necessário informar o nome!");
         }
-        if (parametro.getCusto() <= 0 ){
-            throw new Exception("Ë necessário informar o preço de custo!");
+        if (parametro.getEndereco().isEmpty()) {
+            throw new Exception("Ë necessário informar um endereço!");
         }
-        if (parametro.getValorVenda()<= 0 ){
-            throw new Exception("Ë necessário informar um preço de venda!");
+        if (parametro.getTelefone().isEmpty()) {
+            throw new Exception("Ë necessário informar um telefone!");
         }
-        if (parametro.getTipoProduto()== null) {
-            throw new Exception("Ë necessário informar o tipo do produto!");
+        if (parametro.getTipoCliente() == null) {
+            throw new Exception("Ë necessário informar o tipo do cliente(PF ou PJ)!");
         }
         if (parametro.getIdentificador() == 0) {
             persistencia.incluir(parametro);
@@ -52,12 +52,11 @@ public class NProduto {
         persistencia.excluir(parametro);
     }
 
-    public Produto consultar(int parametro) throws SQLException {
+    public ClientePF consultar(int parametro) throws SQLException {
         return persistencia.consultar(parametro);
     }
 
-    public List<Produto> listar() throws SQLException {
+    public List<ClientePF> listar() throws SQLException {
         return persistencia.listar();
     }
-    
 }

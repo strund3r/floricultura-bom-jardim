@@ -11,38 +11,41 @@ package entidade;
  */
 public class Produto {
 
+    private int identificador;
     private String nome;
-    private String codigo;
     private String descricao;
     private double custo;
     private double valorVenda;
-    private double valorLucro;
     private int quantidade;
+    private TipoProduto tipoProduto;
 
-    public Produto(String nome, String codigo, String descricao, double custo, double valorVenda, double valorLucro, int quantidade) {
+    public Produto(int identificador, String nome, String descricao, double custo, double valorVenda, int quantidade, TipoProduto tipoProduto) {
+        this.identificador = identificador;
         this.nome = nome;
-        this.codigo = codigo;
         this.descricao = descricao;
         this.custo = custo;
         this.valorVenda = valorVenda;
-        this.valorLucro = valorLucro;
         this.quantidade = quantidade;
+        this.tipoProduto = tipoProduto;
+    }
+    
+    public Produto() {
     }
 
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+    
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getDescricao() {
@@ -69,14 +72,6 @@ public class Produto {
         this.valorVenda = valorVenda;
     }
 
-    public double getValorLucro() {
-        return valorLucro;
-    }
-
-    public void setValorLucro(double valorLucro) {
-        this.valorLucro = valorLucro;
-    }
-
     public int getQuantidade() {
         return quantidade;
     }
@@ -85,4 +80,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    public TipoProduto getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(TipoProduto tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
 }

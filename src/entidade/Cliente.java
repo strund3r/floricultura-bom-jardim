@@ -13,28 +13,16 @@ public class Cliente {
 
     private int identificador;
     private String nome;
-    private String cpf;
     private String telefone;
     private String endereco;
     private String email;
-    private Cliente cliente; 
 
-    public Cliente(int identificador, String nome, String cpf, String telefone, String endereco, String email, Cliente cliente) {
+    public Cliente(int identificador, String nome, String telefone, String endereco, String email) {
         this.identificador = identificador;
         this.nome = nome;
-        this.cpf = cpf;
         this.telefone = telefone;
         this.endereco = endereco;
         this.email = email;
-        this.cliente = cliente;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Cliente() {
@@ -55,14 +43,6 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getTelefone() {

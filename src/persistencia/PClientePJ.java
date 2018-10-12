@@ -5,8 +5,8 @@
  */
 package persistencia;
 
-import entidade.Produto;
-import entidade.TipoProduto;
+import entidade.ClientePJ;
+import entidade.TipoCliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,15 +21,15 @@ import java.util.logging.Logger;
  *
  * @author luisf
  */
-public class PProduto {
+public class PClientePJ {
 
     Connection cnn = util.Conexao.getConexao();
 
-    public void incluir(Produto parametro) throws SQLException {
+    public void incluir(ClientePJ parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " produto (nome, descricao, custo, valorvenda, quantidade, id_produto) "
+                + " clientePJ (nome, cnpj, telefone, endereco, email, id_cliente) "
                 + " VALUES (?,?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -40,26 +40,26 @@ public class PProduto {
 
         //Trocando os valores da ? por valores recebidos no método
         prd.setString(1, parametro.getNome());
-        prd.setString(2, parametro.getDescricao());
-        prd.setDouble(3, parametro.getCusto());
-        prd.setDouble(4, parametro.getValorVenda());
-        prd.setInt(5, parametro.getQuantidade());
-        prd.setObject(6, parametro.getTipoProduto().getIdentificador());
+        prd.setString(2, parametro.getCnpj());
+        prd.setString(3, parametro.getTelefone());
+        prd.setString(4, parametro.getEndereco());
+        prd.setString(5, parametro.getEmail());
+        prd.setObject(6, parametro.getTipoCliente().getIdentificador());
 
         prd.execute();
         cnn.close();
     }
 
-    public void alterar(Produto parametro) throws SQLException {
+    public void alterar(ClientePJ parametro) throws SQLException {
 
         try {
             //Cria a instrução sql para a inserção de registros
-            String sql = "UPDATE produto SET"
+            String sql = "UPDATE clientePJ SET"
                     + " nome = ?,"
-                    + " descricao = ?, "
-                    + " custo = ?, "
-                    + " valorvenda = ?"
-                    + " quantidade = ?"
+                    + " cnpj = ?, "
+                    + " telefone = ?, "
+                    + " endereco = ?, "
+                    + " email = ?"
                     + " identificador = ?"
                     + " WHERE identificador = ?";
 
@@ -71,11 +71,11 @@ public class PProduto {
 
             //Trocando os valores da ? por valores recebidos no método
             prd.setString(1, parametro.getNome());
-            prd.setString(2, parametro.getDescricao());
-            prd.setDouble(3, parametro.getCusto());
-            prd.setDouble(4, parametro.getValorVenda());
-            prd.setInt(5, parametro.getQuantidade());
-            prd.setObject(6, parametro.getTipoProduto().getIdentificador());
+            prd.setString(2, parametro.getCnpj());
+            prd.setString(3, parametro.getTelefone());
+            prd.setString(4, parametro.getEndereco());
+            prd.setString(5, parametro.getEmail());
+            prd.setObject(6, parametro.getTipoCliente().getIdentificador());
 
             prd.execute();
             cnn.close();
@@ -87,7 +87,7 @@ public class PProduto {
 
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
-        String sql = "DELETE FROM produto "
+        String sql = "DELETE FROM clientePJ "
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -103,10 +103,10 @@ public class PProduto {
         cnn.close();
     }
 
-    public Produto consultar(int parametro) throws SQLException {
+    public ClientePJ consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, id_tipoproduto"
-                + " FROM produto WHERE identificador = ?;";
+        String sql = "SELECT identificador, nome, endereco, telefone, id_tipoClientePJ"
+                + " FROM clientePJ WHERE identificador = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -115,34 +115,38 @@ public class PProduto {
 
         ResultSet rs = prd.executeQuery();
 
-        Produto retorno = new Produto();
+        ClientePJ retorno = new ClientePJ();
 
         if (rs.next()) {
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
-            retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("id_tipoproduto")));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setTipoCliente(new PTipoCliente().consultar(rs.getInt("id_cliente")));
         }
         return retorno;
     }
 
-    public List<Produto> listar() throws SQLException {
+    public List<ClientePJ> listar() throws SQLException {
 
-        String sql = "SELECT * FROM produto";
+        String sql = "SELECT * FROM clientePJ";
         Connection cnn = util.Conexao.getConexao();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
-        List<Produto> retorno = new ArrayList<>();
+        List<ClientePJ> retorno = new ArrayList<>();
 
         while (rs.next()) {
-            Produto produto = new Produto();
+            ClientePJ clientePJ = new ClientePJ();
 
-            produto.setIdentificador(rs.getInt("identificador"));
-            produto.setNome(rs.getString("nome"));
-            TipoProduto tpProduto = new TipoProduto();
-            tpProduto.setIdentificador(rs.getInt("id_tipoproduto"));
-            produto.setTipoProduto(tpProduto);
+            clientePJ.setIdentificador(rs.getInt("identificador"));
+            clientePJ.setNome(rs.getString("nome"));
+            clientePJ.setEndereco(rs.getString("endereco"));
+            clientePJ.setTelefone(rs.getString("telefone"));
+            TipoCliente tpcliente = new TipoCliente();
+            tpcliente.setIdentificador(rs.getInt("id_tipoClientePJ"));
+            clientePJ.setTipoCliente(tpcliente);
 
-            retorno.add(produto);
+            retorno.add(clientePJ);
         }
         return retorno;
     }
