@@ -5,6 +5,8 @@
  */
 package apresentacao;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luisf
@@ -28,11 +30,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jDesktopPrincipal = new javax.swing.JDesktopPane();
+        btnRelatorio = new javax.swing.JButton();
         btnPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
-        btnRelatorio = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -41,41 +43,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(600, 500));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jDesktopPrincipal.setPreferredSize(new java.awt.Dimension(1200, 1000));
+
+        btnRelatorio.setText("Relatório");
 
         btnPedido.setText("Pedido");
 
         btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
 
         btnProduto.setText("Produto");
 
-        btnRelatorio.setText("Relatório");
+        jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+        javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
+        jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
+        jDesktopPrincipalLayout.setHorizontalGroup(
+            jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addComponent(btnPedido)
-                .addGap(89, 89, 89)
+                .addGap(102, 102, 102)
                 .addComponent(btnCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(btnProduto)
-                .addGap(91, 91, 91)
+                .addGap(105, 105, 105)
                 .addComponent(btnRelatorio)
-                .addGap(61, 61, 61))
+                .addGap(31, 31, 31))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jDesktopPrincipalLayout.setVerticalGroup(
+            jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPedido)
                     .addComponent(btnCliente)
                     .addComponent(btnProduto)
                     .addComponent(btnRelatorio))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(374, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Sobre");
@@ -87,21 +99,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        try {
+            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaCliente);
+            telaCliente.setLocation(15, 15);
+            telaCliente.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +161,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorio;
+    private javax.swing.JDesktopPane jDesktopPrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

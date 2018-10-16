@@ -23,7 +23,7 @@ public class Conexao {
         try {
             Class.forName("org.postgresql.Driver");
 
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/floriculturabomjardim", "postgres", "123456");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/floricultura", "postgres", "123456");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,7 +42,6 @@ public class Conexao {
         try {
             while (conexao == null || conexao.isClosed()) {
                 conexao = Conexao.conectar();
-                System.out.println("Tentando conexão...");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);

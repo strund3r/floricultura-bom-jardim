@@ -105,7 +105,7 @@ public class PClientePF {
 
     public ClientePF consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, endereco, telefone, id_tipoClientePF"
+        String sql = "SELECT identificador, nome, endereco, telefone"
                 + " FROM clientePF WHERE identificador = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
@@ -122,7 +122,7 @@ public class PClientePF {
             retorno.setNome(rs.getString("nome"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
-            retorno.setTipoCliente(new PTipoCliente().consultar(rs.getInt("id_tipoClientePF")));
+//            retorno.setTipoCliente(new PTipoCliente().consultar(rs.getInt("id_tipoClientePF")));
         }
         return retorno;
     }

@@ -7,9 +7,10 @@ package apresentacao;
 
 import entidade.ClientePF;
 import entidade.TipoCliente;
+import java.sql.SQLException;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NClientePF;
-import negocio.NTipoCliente;
 import persistencia.PTipoCliente;
 
 /**
@@ -21,17 +22,19 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCadCliente
      */
+    JDesktopPane jDesktopPrincipal = new JDesktopPane();
+
     public TelaCadCliente() {
         initComponents();
         setLocation(null);
     }
 
+    public TelaCadCliente(JDesktopPane jDesktopPrincipal) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+    }
+
     private void limpar() {
-//        txtCodigo.setText("");
-//        txtNome.setText("");
-//        txtTelefone.setText("");
-//        txtEndereco.setText("");
-//        btnExcluir.setEnabled(false);
     }
 
     /**
@@ -234,7 +237,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             if (jTextFieldNome.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o nome.");
             }
-
             if (jTextFieldCPFCNPJ.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o telefone.");
             }
@@ -257,10 +259,12 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             PTipoCliente ptc = new PTipoCliente();
             TipoCliente tc = new TipoCliente();
 
+            clientePF.setCpf(jTextFieldCodigo.getText());
             clientePF.setNome(jTextFieldNome.getText());
-            clientePF.setTelefone(jTextFieldCPFCNPJ.getText());
+            clientePF.setCpf(jTextFieldCPFCNPJ.getText());
+            clientePF.setTelefone(jTextFieldTelefone.getText());
             clientePF.setEndereco(jTextFieldEndereco.getText());
-            clientePF.setEndereco(jTextFieldEmail.getText());
+            clientePF.setEmail(jTextFieldEmail.getText());
 
             //instancia da camada de negocio do tipo associado para comunicar com os atributos e méodos daquela classe
             NClientePF negocio = new NClientePF();

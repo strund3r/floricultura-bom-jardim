@@ -5,9 +5,15 @@
  */
 package apresentacao;
 
+import entidade.ClientePF;
 import entidade.Pedido;
+import entidade.Produto;
+import java.sql.SQLException;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
-import persistencia.PPedido;
+import negocio.NClientePF;
+import negocio.NPedido;
+import negocio.NProduto;
 
 /**
  *
@@ -18,8 +24,48 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCadProduto
      */
+    JDesktopPane jDesktopPrincipal = new JDesktopPane();
+    ClientePF clientePF;
+    NClientePF negocioClientePF;
+    Produto produto;
+    NProduto negocioProduto;
+    
     public TelaCadPedido() {
         initComponents();
+    }
+    
+    public TelaCadPedido(JDesktopPane jDesktopPrincipal) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+    }
+    
+    public TelaCadPedido(JDesktopPane jDesktopPrincipal, String codigo) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+        //preencher a tela
+        try {
+            
+            negocioClientePF = new NClientePF();
+            clientePF = negocioClientePF.consultar(Integer.parseInt(codigo));
+            negocioProduto = new NProduto();
+            produto = negocioProduto.consultar(Integer.parseInt(codigo));
+            
+            jTextFieldCodigoCliente.setText(clientePF.getIdentificador() + "");
+            jTextFieldNomeCliente.setText(clientePF.getNome());
+            jTextFieldProduto.setText(produto.getNome());
+            jTextFieldValor.setText(Double.toString(produto.getValorVenda()));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    private void limpar() {
+        jTextFieldCodigoCliente.setText("");
+        jTextFieldCodigoPedido.setText("");
+        jTextFieldNomeCliente.setText("");
+        jTextFieldProduto.setText("");
+        jTextFieldQuantidade.setText("");
+        jTextFieldValor.setText("");
     }
 
     /**
@@ -44,7 +90,9 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         btnBuscaCliente = new javax.swing.JButton();
         btnBuscaProduto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldCodigo = new javax.swing.JTextField();
+        jTextFieldCodigoPedido = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldCodigoCliente = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
@@ -77,13 +125,23 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         jLabel7.setText("Preencha os dados do produto:");
 
         btnBuscaCliente.setText("...");
+        btnBuscaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaClienteActionPerformed(evt);
+            }
+        });
 
         btnBuscaProduto.setText("...");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("CÓDIGO:");
+        jLabel2.setText("CÓDIGO PEDIDO:");
 
-        jTextFieldCodigo.setEditable(false);
+        jTextFieldCodigoPedido.setEditable(false);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("CÓDIGO CLIENTE:");
+
+        jTextFieldCodigoCliente.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,45 +149,54 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldProduto))
-                    .addComponent(jLabel7)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextFieldValor))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscaCliente)
-                    .addComponent(btnBuscaProduto))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextFieldProduto))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextFieldValor))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscaCliente)
+                            .addComponent(btnBuscaProduto)
+                            .addComponent(jTextFieldCodigoPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCodigoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +214,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         btnVoltar.setText("Voltar");
@@ -188,8 +255,8 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnLimpar)
@@ -205,47 +272,48 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-   try {
-
+        try {
+            
             if (jTextFieldNomeCliente.getText().isEmpty()) {
-                throw new Exception("E necessário preencher o nome.");
+                throw new Exception("E necessário buscar um cliente no cadastro.");
             }
             if (jTextFieldProduto.getText().isEmpty()) {
-                throw new Exception("E necessário preencher o telefone.");
+                throw new Exception("E necessário buscar um produto no cadastro.");
             }
             if (jTextFieldQuantidade.getText().isEmpty()) {
-                throw new Exception("E necessário preencher o endereço.");
+                throw new Exception("Informe a quantidade do pedido.");
             }
             //instancia do tipo associado para comunicar com os atributos e méodos daquela classe
             Pedido pedido = new Pedido();
-
-            if (!jTextFieldCodigo.getText().isEmpty()) {
-                pedido.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
+            
+            if (!jTextFieldCodigoPedido.getText().isEmpty()) {
+                pedido.setIdentificador(Integer.parseInt(jTextFieldCodigoPedido.getText()));
             }
 
-            PPedido pped = new PPedido();
-
-            pedido.setNome(jt.getText());
-            pedido.setDescricao(jTextFieldDescricao.getText());
-            pedido.setCusto(Double.parseDouble(jTextFieldCusto.getText()));
-            pedido.setValorVenda(Double.parseDouble(jTextFieldValorVenda.getText()));
+//            negocioClientePF = new NClientePF();
+//            clientePF = negocioClientePF.consultar(Integer.parseInt(jTextFieldCodigoCliente));
+//            negocioProduto = new NProduto();
+//            produto = negocioProduto.consultar(Integer.parseInt(jt));
+//            pedido.setId_cliente(clientePF.getIdentificador());
+//            pedido.setId_produto(produto.getIdentificador());
             pedido.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
 
             //instancia da camada de negocio do tipo associado para comunicar com os atributos e méodos daquela classe
-            NPedido negocio = new NPedido();
-
-            negocio.salvar(produto);
-
+            NPedido negocioPedido = new NPedido();
+            
+            negocioPedido.salvar(pedido);
+            
             JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
-
+            
             limpar();
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-
+    private void btnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscaClienteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscaCliente;
     private javax.swing.JButton btnBuscaProduto;
@@ -255,11 +323,13 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldCodigo;
+    private javax.swing.JTextField jTextFieldCodigoCliente;
+    private javax.swing.JTextField jTextFieldCodigoPedido;
     private javax.swing.JTextField jTextFieldNomeCliente;
     private javax.swing.JTextField jTextFieldProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
