@@ -180,11 +180,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         try {
             TelaCadCliente telaCadCliente = new TelaCadCliente(jDesktopPrincipal);
             jDesktopPrincipal.add(telaCadCliente);
-            telaCadCliente.setLocation(15, 15);
+            telaCadCliente.setLocation(20, 15);
             telaCadCliente.setVisible(true);
 //            this.disposthis.dispose();e();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getClass());
+            e.printStackTrace();
 //            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed

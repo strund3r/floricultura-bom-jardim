@@ -29,7 +29,7 @@ public class PClientePF {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " clientePF (nome, cpf, telefone, endereco, email, id_clientePF) "
+                + " clientepf (nome, cpf, telefone, endereco, email, identificador) "
                 + " VALUES (?,?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -54,7 +54,7 @@ public class PClientePF {
 
         try {
             //Cria a instrução sql para a inserção de registros
-            String sql = "UPDATE clientePF SET"
+            String sql = "UPDATE clientepf SET"
                     + " nome = ?,"
                     + " cpf = ?, "
                     + " telefone = ?, "
@@ -87,7 +87,7 @@ public class PClientePF {
 
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
-        String sql = "DELETE FROM clientePF "
+        String sql = "DELETE FROM clientepf "
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -129,7 +129,7 @@ public class PClientePF {
 
     public List<ClientePF> listar() throws SQLException {
 
-        String sql = "SELECT * FROM clientePF";
+        String sql = "SELECT * FROM clientepf";
         Connection cnn = util.Conexao.getConexao();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
@@ -143,7 +143,7 @@ public class PClientePF {
             clientePF.setEndereco(rs.getString("endereco"));
             clientePF.setTelefone(rs.getString("telefone"));
             TipoCliente tpcliente = new TipoCliente();
-            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));
+            tpcliente.setIdentificador(rs.getInt("identificador"));
             clientePF.setTipoCliente(tpcliente);
 
             retorno.add(clientePF);

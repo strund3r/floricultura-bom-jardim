@@ -46,6 +46,7 @@ public class NClientePF {
         } else {
             persistencia.alterar(parametro);
         }
+        
     }
 
     public void excluir(int parametro) throws SQLException {
