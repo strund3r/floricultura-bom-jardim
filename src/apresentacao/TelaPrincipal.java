@@ -5,6 +5,10 @@
  */
 package apresentacao;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,11 +34,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPrincipal = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/util/back.jpg"));
+        Image image = icon.getImage();
+        jDesktopPrincipal = new javax.swing.JDesktopPane(){
+
+            @Override
+            public void paintComponent(Graphics gr){
+                gr.drawImage(image,0,0,getWidth(),getHeight(), this);
+            }
+        };
         btnRelatorio = new javax.swing.JButton();
         btnPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
+        jLabelBackground = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -48,6 +61,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnRelatorio.setText("Relatório");
 
         btnPedido.setText("Pedido");
+        btnPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidoActionPerformed(evt);
+            }
+        });
 
         btnCliente.setText("Cliente");
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -57,11 +75,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnProduto.setText("Produto");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutoActionPerformed(evt);
+            }
+        });
 
         jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(jLabelBackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
@@ -77,6 +101,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(105, 105, 105)
                 .addComponent(btnRelatorio)
                 .addGap(31, 31, 31))
+            .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                .addGap(312, 312, 312)
+                .addComponent(jLabelBackground)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPrincipalLayout.setVerticalGroup(
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +115,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCliente)
                     .addComponent(btnProduto)
                     .addComponent(btnRelatorio))
-                .addContainerGap(374, Short.MAX_VALUE))
+                .addGap(139, 139, 139)
+                .addComponent(jLabelBackground)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Sobre");
@@ -109,6 +139,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        try {
+            TelaProduto telaProduto = new TelaProduto(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaProduto);
+            telaProduto.setLocation(15, 15);
+            telaProduto.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnProdutoActionPerformed
+
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         try {
             TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
@@ -121,6 +163,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
+        try {
+            TelaPedido telaPedido = new TelaPedido(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaPedido);
+            telaPedido.setLocation(15, 15);
+            telaPedido.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnPedidoActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -162,6 +215,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JDesktopPane jDesktopPrincipal;
+    private javax.swing.JLabel jLabelBackground;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables

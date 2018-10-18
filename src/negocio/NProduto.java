@@ -24,11 +24,6 @@ public class NProduto {
 
     public void salvar(Produto parametro) throws SQLException, Exception {
 
-//        NTipoAssociado ntp = new NTipoAssociado();
-//
-//        TipoAssociado tp = new TipoAssociado();
-//        //instancia novo objeto do tipo associado
-//        Associado associado = new Associado();
         if (parametro.getNome().isEmpty()) {
             throw new Exception("Ë necessário informar o nome do produto!");
         }

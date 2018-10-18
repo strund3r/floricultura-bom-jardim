@@ -12,11 +12,11 @@ package entidade;
 public class TipoProduto {
 
     private int identificador;
-    private String descricao;
+    private String nome;
 
     public TipoProduto(int identificador, String descricao) {
         this.identificador = identificador;
-        this.descricao = descricao;
+        this.nome = descricao;
     }
 
     public TipoProduto() {
@@ -30,12 +30,12 @@ public class TipoProduto {
         this.identificador = identificador;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String descricao) {
+        this.nome = descricao;
     }
 
 }

@@ -29,7 +29,7 @@ public class PProduto {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " produto (nome, descricao, custo, valorvenda, quantidade, id_produto) "
+                + " produto (nome, descricao, custo, valorvenda, quantidade, tipo) "
                 + " VALUES (?,?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -105,7 +105,7 @@ public class PProduto {
 
     public Produto consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, id_tipoproduto"
+        String sql = "SELECT identificador, nome"
                 + " FROM produto WHERE identificador = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
@@ -120,7 +120,7 @@ public class PProduto {
         if (rs.next()) {
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
-            retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("id_tipoproduto")));
+            retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("identificador")));
         }
         return retorno;
     }
@@ -138,8 +138,10 @@ public class PProduto {
 
             produto.setIdentificador(rs.getInt("identificador"));
             produto.setNome(rs.getString("nome"));
+            produto.setValorVenda(rs.getInt("valorvenda"));
+            produto.setQuantidade(rs.getInt("valorvenda"));
+            produto.setDescricao(rs.getString("nome"));
             TipoProduto tpProduto = new TipoProduto();
-            tpProduto.setIdentificador(rs.getInt("id_tipoproduto"));
             produto.setTipoProduto(tpProduto);
 
             retorno.add(produto);

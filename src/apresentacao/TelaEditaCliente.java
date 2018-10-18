@@ -7,6 +7,7 @@ package apresentacao;
 
 import entidade.ClientePF;
 import entidade.TipoCliente;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NClientePF;
@@ -16,29 +17,44 @@ import persistencia.PTipoCliente;
  *
  * @author luisf
  */
-public class TelaCadCliente extends javax.swing.JInternalFrame {
+public class TelaEditaCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaCadCliente
      */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
 
-    public TelaCadCliente() {
+    public TelaEditaCliente() {
         initComponents();
     }
 
-    public TelaCadCliente(JDesktopPane jDesktopPrincipal) {
+    public TelaEditaCliente(JDesktopPane jDesktopPrincipal) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
     }
 
+    TelaEditaCliente(JDesktopPane jDesktopPrincipal, String codigo) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+        //preencher a tela
+        try {
+
+            NClientePF negocio = new NClientePF();
+            ClientePF clientePF = negocio.consultar(Integer.parseInt(codigo));
+
+            jTextFieldCodigo.setText(clientePF.getIdentificador() + "");
+            jTextFieldNome.setText(clientePF.getNome());
+            jTextFieldCPFCNPJ.setText(clientePF.getCpf()+ "");
+            jTextFieldTelefone.setText(clientePF.getTelefone()+ "");
+            jTextFieldEndereco.setText(clientePF.getEndereco()+ "");
+            jTextFieldEmail.setText(clientePF.getEmail()+ "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
     private void limpar() {
-        jTextFieldNome.setText("");
-        jTextFieldTelefone.setText("");
-        jTextFieldEndereco.setText("");
-        jTextFieldCodigo.setText("");
-        jTextFieldEmail.setText("");
-        jTextFieldCPFCNPJ.setText("");
     }
 
     /**
@@ -61,21 +77,21 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBoxPJPF = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
-        setTitle("Cadastro de Clientes");
+        setTitle("Alteração de dados de Clientes");
         setPreferredSize(new java.awt.Dimension(485, 375));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("NOME:.......");
+
+        jTextFieldCPFCNPJ.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("CPF/CNPJ:.");
@@ -89,10 +105,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("E-MAIL:.....");
 
-        jComboBoxPJPF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel7.setText("Tipo de pessoa:");
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("CÓDIGO:");
 
@@ -105,16 +117,13 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxPJPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(296, 296, 296))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -135,8 +144,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,8 +152,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxPJPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -179,11 +185,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -198,17 +199,15 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVoltar)
                         .addGap(128, 128, 128)
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +219,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
                     .addComponent(btnVoltar)
                     .addComponent(btnLimpar)
                     .addComponent(btnSalvar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,9 +244,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             if (jTextFieldNome.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o nome.");
             }
-            if (jTextFieldCPFCNPJ.getText().isEmpty()) {
-                throw new Exception("E necessário preencher o CPF.");
-            }
             if (jTextFieldTelefone.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o telefone.");
             }
@@ -267,7 +263,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             TipoCliente tc = new TipoCliente();
 
             clientePF.setNome(jTextFieldNome.getText());
-            clientePF.setCpf(jTextFieldCPFCNPJ.getText());
             clientePF.setTelefone(jTextFieldTelefone.getText());
             clientePF.setEndereco(jTextFieldEndereco.getText());
             clientePF.setEmail(jTextFieldEmail.getText());
@@ -287,21 +282,15 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limpar();
-    }//GEN-LAST:event_btnLimparActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> jComboBoxPJPF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldCPFCNPJ;
