@@ -23,7 +23,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
      * Creates new form TelaCliente
      */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
-
     public TelaCliente() {
         initComponents();
         carregarTabela();
@@ -67,7 +66,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
