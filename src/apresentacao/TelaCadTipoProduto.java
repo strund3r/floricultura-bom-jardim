@@ -153,7 +153,6 @@ public class TelaCadTipoProduto extends javax.swing.JInternalFrame {
             if (jTextFieldNome.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o nome.");
             }
-            //instancia do tipo associado para comunicar com os atributos e méodos daquela classe
             TipoProduto tipoProduto = new TipoProduto();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
@@ -165,7 +164,6 @@ public class TelaCadTipoProduto extends javax.swing.JInternalFrame {
 
             tipoProduto.setNome(jTextFieldNome.getText());
 
-            //instancia da camada de negocio do tipo associado para comunicar com os atributos e méodos daquela classe
             NTipoProduto negocio = new NTipoProduto();
 
             negocio.salvar(tipoProduto);

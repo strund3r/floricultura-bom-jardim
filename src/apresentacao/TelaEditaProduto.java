@@ -7,6 +7,7 @@ package apresentacao;
 
 import entidade.Produto;
 import entidade.TipoProduto;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NProduto;
@@ -17,21 +18,36 @@ import persistencia.PTipoProduto;
  *
  * @author luisf
  */
-public class TelaCadProduto extends javax.swing.JInternalFrame {
+public class TelaEditaProduto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaCadProduto
      */
     JDesktopPane jDesktopPrincipal;
-    
-    public TelaCadProduto() {
+
+    public TelaEditaProduto() {
         initComponents();
         carregarCombo();
     }
 
-    public TelaCadProduto(JDesktopPane jDesktopPrincipal) {
+    public TelaEditaProduto(JDesktopPane jDesktopPrincipal, String codigo) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
+        try {
+
+            NProduto negocio = new NProduto();
+            Produto produto = negocio.consultar(Integer.parseInt(codigo));
+
+            jTextFieldCodigo.setText(produto.getIdentificador() + "");
+            jTextFieldNome.setText(produto.getNome());
+            jTextFieldDescricao.setText(produto.getDescricao() + "");
+            jTextFieldCusto.setText(produto.getCusto() + "");
+            jTextFieldValorVenda.setText(produto.getValorVenda() + "");
+            jTextFieldQuantidade.setText(produto.getQuantidade() + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     private void limpar() {
@@ -42,8 +58,8 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
         jTextFieldValorVenda.setText("");
         jTextFieldQuantidade.setText("");
     }
-    
-       private void carregarCombo() {
+
+    private void carregarCombo() {
         try {
 
             for (TipoProduto tp : new NTipoProduto().listar()) {
@@ -82,8 +98,9 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
-        setTitle("Cadastro de Produtos");
+        setTitle("Atualização de Produtos");
         setPreferredSize(new java.awt.Dimension(485, 350));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -199,21 +216,31 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar)))
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcluir)
+                .addGap(64, 64, 64)
+                .addComponent(btnLimpar)
+                .addGap(68, 68, 68)
+                .addComponent(btnSalvar)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,11 +248,13 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnSalvar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExcluir)
+                        .addComponent(btnLimpar))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,7 +300,7 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
 
-            limpar();
+            dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -281,7 +310,23 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        try {
+            int resposta = JOptionPane.showConfirmDialog(null, "Confirma a exclusão do produto?", "Gestão Floricultura", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                NProduto negocio = new NProduto();
+                negocio.excluir(Integer.parseInt(jTextFieldCodigo.getText()));
+                JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!");
+                limpar();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;

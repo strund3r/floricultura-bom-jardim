@@ -105,7 +105,7 @@ public class PProduto {
 
     public Produto consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome"
+        String sql = "SELECT identificador, nome, descricao, custo,valorvenda, quantidade"
                 + " FROM produto WHERE identificador = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
@@ -120,6 +120,10 @@ public class PProduto {
         if (rs.next()) {
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
+            retorno.setDescricao(rs.getString("descricao"));
+            retorno.setCusto(rs.getDouble("custo"));
+            retorno.setValorVenda(rs.getDouble("valorvenda"));
+            retorno.setQuantidade(rs.getInt("quantidade"));
             retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("identificador")));
         }
         return retorno;
@@ -138,9 +142,10 @@ public class PProduto {
 
             produto.setIdentificador(rs.getInt("identificador"));
             produto.setNome(rs.getString("nome"));
-            produto.setValorVenda(rs.getInt("valorvenda"));
-            produto.setQuantidade(rs.getInt("valorvenda"));
-            produto.setDescricao(rs.getString("nome"));
+            produto.setDescricao(rs.getString("descricao"));
+            produto.setCusto(rs.getDouble("custo"));
+            produto.setValorVenda(rs.getDouble("valorvenda"));
+            produto.setQuantidade(rs.getInt("quantidade"));
             TipoProduto tpProduto = new TipoProduto();
             produto.setTipoProduto(tpProduto);
 

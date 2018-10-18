@@ -283,7 +283,6 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             if (jTextFieldQuantidade.getText().isEmpty()) {
                 throw new Exception("Informe a quantidade do pedido.");
             }
-            //instancia do tipo associado para comunicar com os atributos e méodos daquela classe
             Pedido pedido = new Pedido();
             
             if (!jTextFieldCodigoPedido.getText().isEmpty()) {
@@ -298,7 +297,6 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
 //            pedido.setId_produto(produto.getIdentificador());
             pedido.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
 
-            //instancia da camada de negocio do tipo associado para comunicar com os atributos e méodos daquela classe
             NPedido negocioPedido = new NPedido();
             
             negocioPedido.salvar(pedido);

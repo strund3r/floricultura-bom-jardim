@@ -268,7 +268,6 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
             clientePF.setEmail(jTextFieldEmail.getText());
             clientePF.setTipoCliente(tc);
 
-            //instancia da camada de negocio do tipo associado para comunicar com os atributos e méodos daquela classe
             NClientePF negocio = new NClientePF();
 
             negocio.salvar(clientePF);

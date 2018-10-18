@@ -51,6 +51,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
+        btnFornecedor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -69,9 +70,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnPedido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/017plant.png"))); // NOI18N
-        btnPedido.setText("<html><center>Pedido");
+        btnPedido.setText("Pedido");
         btnPedido.setActionCommand("");
+        btnPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPedido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPedido.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
         btnPedido.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         //btnPedido.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -102,10 +105,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
+        btnFornecedor.setText("Fornecedor");
+        btnFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
         jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(btnFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
@@ -113,13 +123,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
-                .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnCliente)
-                .addGap(44, 44, 44)
-                .addComponent(btnProduto)
-                .addGap(38, 38, 38)
-                .addComponent(btnRelatorio)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFornecedor)
+                    .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnPedido)
+                        .addGap(43, 43, 43)
+                        .addComponent(btnCliente)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnProduto)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnRelatorio)))
                 .addGap(57, 57, 57))
         );
         jDesktopPrincipalLayout.setVerticalGroup(
@@ -128,10 +141,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRelatorio)
-                    .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPedido)
                     .addComponent(btnCliente)
                     .addComponent(btnProduto))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(btnFornecedor)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Sobre");
@@ -236,6 +251,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorio;

@@ -65,7 +65,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +123,11 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnNovoTipoProd.setText("Novo Tipo");
         btnNovoTipoProd.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +189,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 //            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed
-
     private void btnNovoTipoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoTipoProdActionPerformed
         try {
             TelaCadTipoProduto telaCadTipoProduto = new TelaCadTipoProduto(jDesktopPrincipal);
@@ -197,6 +200,21 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnNovoTipoProdActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            int linha = tblProduto.getSelectedRow();
+            String codigo = tblProduto.getValueAt(linha, 0).toString();
+
+            TelaEditaProduto telaEditaProduto = new TelaEditaProduto(jDesktopPrincipal, codigo );
+            jDesktopPrincipal.add(telaEditaProduto);
+            telaEditaProduto.setLocation(20, 15);
+            telaEditaProduto.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
