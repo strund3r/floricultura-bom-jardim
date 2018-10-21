@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author luisf (retirado de: https://solutionbto.wordpress.com/2014/12/15/criando-cellrenderer-para-formatacao-de-colunas-na-jtable/)
+ * @author luisf (retirado de: http://www.guj.com.br/t/formatacao-colunas-jtable/233490/9)
  */
 public class FormatRenderer extends DefaultTableCellRenderer {
  

@@ -6,16 +6,11 @@
 package apresentacao;
 
 import entidade.Produto;
-import java.awt.Component;
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import negocio.NProduto;
 
 /**
@@ -40,8 +35,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
-        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-
         try {
 
             Vector<String> cabecalho = new Vector();
@@ -59,18 +52,19 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
                 conteudo.add(produto.getIdentificador() + "");
                 conteudo.add(produto.getNome() + "");
-                conteudo.add(nf.format(produto.getValorVenda()));
+                conteudo.add(produto.getValorVenda() + "");
                 conteudo.add(produto.getQuantidade() + "");
                 conteudo.add(produto.getDescricao() + "");
                 linhas.add(conteudo);
             }
             tblProduto.setModel(new DefaultTableModel(linhas, cabecalho));
 
+            tblProduto.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,16 +76,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable(){
-            @Override
-            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
-                Component component = super.prepareRenderer(renderer, row, column);
-                int rendererWidth = component.getPreferredSize().width;
-                TableColumn tableColumn = getColumnModel().getColumn(column);
-                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
-                return component;
-            }
-        };
+        tblProduto = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -221,7 +206,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             int linha = tblProduto.getSelectedRow();
             String codigo = tblProduto.getValueAt(linha, 0).toString();
 
-            TelaEditaProduto telaEditaProduto = new TelaEditaProduto(jDesktopPrincipal, codigo);
+            TelaEditaProduto telaEditaProduto = new TelaEditaProduto(jDesktopPrincipal, codigo );
             jDesktopPrincipal.add(telaEditaProduto);
             telaEditaProduto.setLocation(20, 15);
             telaEditaProduto.setVisible(true);
