@@ -109,7 +109,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/037cactus.png"/>
+              <Image iconType="3" name="/imagens/037cactus.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -122,7 +122,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/017plant.png"/>
+              <Image iconType="3" name="/imagens/017plant.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pedido"/>
             <Property name="actionCommand" type="java.lang.String" value=""/>
@@ -130,9 +130,6 @@
               <Color id="Cursor Padr&#xe3;o"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="rolloverSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/038bushes.png"/>
-            </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -148,7 +145,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/019bonsai.png"/>
+              <Image iconType="3" name="/imagens/019bonsai.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cliente"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -164,7 +161,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/033plant.png"/>
+              <Image iconType="3" name="/imagens/033plant.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Produto"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -180,7 +177,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/util/038bushes.png"/>
+              <Image iconType="3" name="/imagens/038bushes.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Fornecedor"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>

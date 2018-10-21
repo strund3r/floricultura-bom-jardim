@@ -7,10 +7,7 @@ package apresentacao;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +23,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-//        btnPedido.setIcon(new ImageIcon("C:/Arquivos/017plant.png"));
     }
 
     /**
@@ -63,18 +59,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPrincipal.setPreferredSize(new java.awt.Dimension(1200, 1000));
 
         btnRelatorio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/037cactus.png"))); // NOI18N
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/037cactus.png"))); // NOI18N
         btnRelatorio.setText("Relatório");
         btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnPedido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/017plant.png"))); // NOI18N
+        btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/017plant.png"))); // NOI18N
         btnPedido.setText("Pedido");
         btnPedido.setActionCommand("");
         btnPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPedido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPedido.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
         btnPedido.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         //btnPedido.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/019bonsai.png"))); // NOI18N
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/019bonsai.png"))); // NOI18N
         btnCliente.setText("Cliente");
         btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -95,7 +90,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/033plant.png"))); // NOI18N
+        btnProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/033plant.png"))); // NOI18N
         btnProduto.setText("Produto");
         btnProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnProduto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,7 +101,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
+        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/038bushes.png"))); // NOI18N
         btnFornecedor.setText("Fornecedor");
         btnFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
