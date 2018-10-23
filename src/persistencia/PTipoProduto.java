@@ -50,7 +50,7 @@ public class PTipoProduto {
             //Cria a instrução sql para a inserção de registros
             String sql = "UPDATE tipoproduto SET"
                     + " nome = ?,"
-                    + " WHERE identificador = ?";
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -60,7 +60,7 @@ public class PTipoProduto {
 
             //Trocando os valores da ? por valores recebidos no método
             prd.setString(1, parametro.getNome());
-            prd.setInt(2, parametro.getIdentificador());
+            prd.setInt(2, parametro.getID());
 
             prd.execute();
             cnn.close();
@@ -73,7 +73,7 @@ public class PTipoProduto {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM tipoproduto "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -90,8 +90,8 @@ public class PTipoProduto {
 
     public TipoProduto consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome"
-                + " FROM tipoproduto WHERE identificador = ?;";
+        String sql = "SELECT id, nome"
+                + " FROM tipoproduto WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class PTipoProduto {
         TipoProduto retorno = new TipoProduto();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
         }
 
@@ -125,7 +125,7 @@ public class PTipoProduto {
         while (rs.next()) {
             TipoProduto tipo = new TipoProduto();
 
-            tipo.setIdentificador(rs.getInt("identificador"));
+            tipo.setID(rs.getInt("id"));
             tipo.setNome(rs.getString("nome"));
 
             retorno.add(tipo);
@@ -135,8 +135,8 @@ public class PTipoProduto {
 
     public TipoProduto consultarPorString(String parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome"
-                + " FROM tipoproduto WHERE identificador = ?;";
+        String sql = "SELECT id, nome"
+                + " FROM tipoproduto WHERE id = ?;";
 
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -147,7 +147,7 @@ public class PTipoProduto {
         TipoProduto retorno = new TipoProduto();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
         }
 

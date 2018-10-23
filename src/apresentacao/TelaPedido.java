@@ -40,7 +40,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             Vector<String> cabecalho = new Vector();
             cabecalho.add("Código");
             cabecalho.add("Cliente");
-            cabecalho.add("Quantidade");
+//            cabecalho.add("Quantidade");
             cabecalho.add("Produto");
 
             NPedido negocio = new NPedido();
@@ -49,9 +49,9 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             for (Pedido pedido : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(pedido.getIdentificador() + "");
+                conteudo.add(pedido.getID() + "");
                 conteudo.add(pedido.getId_cliente() + "");
-                conteudo.add(pedido.getQuantidade() + "");
+//                conteudo.add(pedido.getQuantidade() + "");
                 conteudo.add(pedido.getId_produto() + "");
                 linhas.add(conteudo);
             }
@@ -156,9 +156,17 @@ public class TelaPedido extends javax.swing.JInternalFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-
+        try {
+            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaCadPedido);
+            telaCadPedido.setLocation(20, 15);
+            telaCadPedido.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

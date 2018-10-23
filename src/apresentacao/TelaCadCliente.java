@@ -260,7 +260,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
             ClientePF clientePF = new ClientePF();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                clientePF.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
+                clientePF.setID(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
             PTipoCliente ptc = new PTipoCliente();

@@ -24,11 +24,6 @@ public class NClientePF {
 
     public void salvar(ClientePF parametro) throws SQLException, Exception {
 
-//        NTipoAssociado ntp = new NTipoAssociado();
-//
-//        TipoAssociado tp = new TipoAssociado();
-//        //instancia novo objeto do tipo associado
-//        Associado associado = new Associado();
         if (parametro.getNome().isEmpty()) {
             throw new Exception("Ë necessário informar o nome!");
         }
@@ -41,7 +36,7 @@ public class NClientePF {
         if (parametro.getTipoCliente() == null) {
             throw new Exception("Ë necessário informar o tipo do cliente(PF ou PJ)!");
         }
-        if (parametro.getIdentificador() == 0) {
+        if (parametro.getID()== 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

@@ -7,10 +7,7 @@ package apresentacao;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +23,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-//        btnPedido.setIcon(new ImageIcon("C:/Arquivos/017plant.png"));
     }
 
     /**
@@ -52,29 +48,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
         btnFornecedor = new javax.swing.JButton();
+        btnTitulo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão da Floricultura");
+        setPreferredSize(new java.awt.Dimension(700, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(600, 500));
+        setSize(new java.awt.Dimension(700, 600));
 
         jDesktopPrincipal.setPreferredSize(new java.awt.Dimension(1200, 1000));
 
         btnRelatorio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/037cactus.png"))); // NOI18N
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/037cactus.png"))); // NOI18N
         btnRelatorio.setText("Relatório");
         btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnPedido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/017plant.png"))); // NOI18N
+        btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/017plant.png"))); // NOI18N
         btnPedido.setText("Pedido");
         btnPedido.setActionCommand("");
         btnPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPedido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPedido.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
         btnPedido.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         //btnPedido.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +81,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/019bonsai.png"))); // NOI18N
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/019bonsai.png"))); // NOI18N
         btnCliente.setText("Cliente");
         btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -95,7 +92,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/033plant.png"))); // NOI18N
+        btnProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/033plant.png"))); // NOI18N
         btnProduto.setText("Produto");
         btnProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnProduto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,16 +103,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/util/038bushes.png"))); // NOI18N
+        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/038bushes.png"))); // NOI18N
         btnFornecedor.setText("Fornecedor");
         btnFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btnTitulo.setText("Título");
+        btnTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTituloActionPerformed(evt);
+            }
+        });
 
         jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(btnTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
@@ -124,15 +129,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFornecedor)
-                    .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnPedido)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnCliente)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnProduto)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnRelatorio)))
+                    .addComponent(btnPedido)
+                    .addComponent(btnFornecedor))
+                .addGap(43, 43, 43)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(btnProduto)
+                .addGap(38, 38, 38)
+                .addComponent(btnRelatorio)
                 .addGap(57, 57, 57))
         );
         jDesktopPrincipalLayout.setVerticalGroup(
@@ -145,7 +151,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCliente)
                     .addComponent(btnProduto))
                 .addGap(39, 39, 39)
-                .addComponent(btnFornecedor)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -214,6 +222,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 + "\nFranzwagner Ternus\nLetícia Ribeiro\nLuis Faria\n\nÍcones fornecidos por Freepik via"
                 + " Flaticon (www.flaticon.com)\n\nGoiânia - 2018", "Sobre", 2);
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void btnTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituloActionPerformed
+        // TODO add your handling code here:
+        try {
+            TelaTitulo telaTitulo = new TelaTitulo(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaTitulo);
+            telaTitulo.setLocation(15, 15);
+            telaTitulo.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_btnTituloActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -255,6 +278,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnTitulo;
     private javax.swing.JDesktopPane jDesktopPrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

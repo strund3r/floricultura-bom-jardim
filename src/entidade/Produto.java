@@ -11,7 +11,7 @@ package entidade;
  */
 public class Produto {
 
-    private int identificador;
+    private int id;
     private String nome;
     private String descricao;
     private double custo;
@@ -19,8 +19,8 @@ public class Produto {
     private int quantidade;
     private TipoProduto tipoProduto;
 
-    public Produto(int identificador, String nome, String descricao, double custo, double valorVenda, int quantidade, TipoProduto tipoProduto) {
-        this.identificador = identificador;
+    public Produto(int id, String nome, String descricao, double custo, double valorVenda, int quantidade, TipoProduto tipoProduto) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
@@ -32,12 +32,12 @@ public class Produto {
     public Produto() {
     }
 
-    public int getIdentificador() {
-        return identificador;
+    public int getID() {
+        return id;
     }
 
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
+    public void setID(int identificador) {
+        this.id = identificador;
     }
     
     public String getNome() {

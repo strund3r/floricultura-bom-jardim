@@ -50,7 +50,7 @@ public class PTipoCliente {
             //Cria a instrução sql para a inserção de registros
             String sql = "UPDATE tipocliente SET"
                     + " descricao = ?,"
-                    + " WHERE identificador = ?";
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -60,7 +60,7 @@ public class PTipoCliente {
 
             //Trocando os valores da ? por valores recebidos no método
             prd.setString(1, parametro.getDescricao());
-            prd.setInt(2, parametro.getIdentificador());
+            prd.setInt(2, parametro.getID());
 
             prd.execute();
             cnn.close();
@@ -73,7 +73,7 @@ public class PTipoCliente {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM tipocliente "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -90,8 +90,8 @@ public class PTipoCliente {
 
     public TipoCliente consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, descricao"
-                + " FROM tipocliente WHERE identificador = ?;";
+        String sql = "SELECT id, descricao"
+                + " FROM tipocliente WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class PTipoCliente {
         TipoCliente retorno = new TipoCliente();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setDescricao(rs.getString("descricao"));
         }
 
@@ -125,7 +125,7 @@ public class PTipoCliente {
         while (rs.next()) {
             TipoCliente tipo = new TipoCliente();
 
-            tipo.setIdentificador(rs.getInt("identificador"));
+            tipo.setID(rs.getInt("id"));
             tipo.setDescricao(rs.getString("descricao"));
 
             retorno.add(tipo);
@@ -135,8 +135,8 @@ public class PTipoCliente {
 
     public TipoCliente consultarPorString(String parametro) throws SQLException {
 
-        String sql = "SELECT identificador, descricao"
-                + " FROM tipocliente WHERE identificador = ?;";
+        String sql = "SELECT id, descricao"
+                + " FROM tipocliente WHERE id = ?;";
 
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -147,7 +147,7 @@ public class PTipoCliente {
         TipoCliente retorno = new TipoCliente();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setDescricao(rs.getString("descricao"));
         }
 

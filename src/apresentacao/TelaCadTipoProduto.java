@@ -156,7 +156,7 @@ public class TelaCadTipoProduto extends javax.swing.JInternalFrame {
             TipoProduto tipoProduto = new TipoProduto();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                tipoProduto.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
+                tipoProduto.setID(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
             PTipoProduto ptp = new PTipoProduto();

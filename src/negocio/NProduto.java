@@ -36,7 +36,7 @@ public class NProduto {
         if (parametro.getTipoProduto()== null) {
             throw new Exception("Ë necessário informar o tipo do produto!");
         }
-        if (parametro.getIdentificador() == 0) {
+        if (parametro.getID() == 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

@@ -11,15 +11,15 @@ package entidade;
  */
 public class TipoCliente {
 
-    private int identificador;
+    private int id;
     private String descricao;
 
-    public int getIdentificador() {
-        return identificador;
+    public int getID() {
+        return id;
     }
 
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
+    public void setID(int id) {
+        this.id = id;
     }
 
     public String getDescricao() {

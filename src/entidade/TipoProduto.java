@@ -11,23 +11,23 @@ package entidade;
  */
 public class TipoProduto {
 
-    private int identificador;
+    private int id;
     private String nome;
 
-    public TipoProduto(int identificador, String descricao) {
-        this.identificador = identificador;
+    public TipoProduto(int id, String descricao) {
+        this.id = id;
         this.nome = descricao;
     }
 
     public TipoProduto() {
     }
 
-    public int getIdentificador() {
-        return identificador;
+    public int getID() {
+        return id;
     }
 
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
+    public void setID(int id) {
+        this.id = id;
     }
 
     public String getNome() {

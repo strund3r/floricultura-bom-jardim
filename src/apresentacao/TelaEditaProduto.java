@@ -38,7 +38,7 @@ public class TelaEditaProduto extends javax.swing.JInternalFrame {
             NProduto negocio = new NProduto();
             Produto produto = negocio.consultar(Integer.parseInt(codigo));
 
-            jTextFieldCodigo.setText(produto.getIdentificador() + "");
+            jTextFieldCodigo.setText(produto.getID() + "");
             jTextFieldNome.setText(produto.getNome());
             jTextFieldDescricao.setText(produto.getDescricao() + "");
             jTextFieldCusto.setText(produto.getCusto() + "");
@@ -281,7 +281,7 @@ public class TelaEditaProduto extends javax.swing.JInternalFrame {
             Produto produto = new Produto();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                produto.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
+                produto.setID(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
             PTipoProduto ptp = new PTipoProduto();

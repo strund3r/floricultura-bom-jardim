@@ -44,7 +44,7 @@ public class PClientePJ {
         prd.setString(3, parametro.getTelefone());
         prd.setString(4, parametro.getEndereco());
         prd.setString(5, parametro.getEmail());
-        prd.setObject(6, parametro.getTipoCliente().getIdentificador());
+        prd.setObject(6, parametro.getTipoCliente().getID());
 
         prd.execute();
         cnn.close();
@@ -60,8 +60,8 @@ public class PClientePJ {
                     + " telefone = ?, "
                     + " endereco = ?, "
                     + " email = ?"
-                    + " identificador = ?"
-                    + " WHERE identificador = ?";
+                    + " id = ?"
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -75,7 +75,7 @@ public class PClientePJ {
             prd.setString(3, parametro.getTelefone());
             prd.setString(4, parametro.getEndereco());
             prd.setString(5, parametro.getEmail());
-            prd.setObject(6, parametro.getTipoCliente().getIdentificador());
+            prd.setObject(6, parametro.getTipoCliente().getID());
 
             prd.execute();
             cnn.close();
@@ -88,7 +88,7 @@ public class PClientePJ {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM clientePJ "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -106,7 +106,7 @@ public class PClientePJ {
     public ClientePJ consultar(int parametro) throws SQLException {
 
         String sql = "SELECT identificador, nome, endereco, telefone, id_tipoClientePJ"
-                + " FROM clientePJ WHERE identificador = ?;";
+                + " FROM clientePJ WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class PClientePJ {
         ClientePJ retorno = new ClientePJ();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
@@ -138,12 +138,12 @@ public class PClientePJ {
         while (rs.next()) {
             ClientePJ clientePJ = new ClientePJ();
 
-            clientePJ.setIdentificador(rs.getInt("identificador"));
+            clientePJ.setID(rs.getInt("id"));
             clientePJ.setNome(rs.getString("nome"));
             clientePJ.setEndereco(rs.getString("endereco"));
             clientePJ.setTelefone(rs.getString("telefone"));
             TipoCliente tpcliente = new TipoCliente();
-            tpcliente.setIdentificador(rs.getInt("id_tipoClientePJ"));
+            tpcliente.setID(rs.getInt("id"));
             clientePJ.setTipoCliente(tpcliente);
 
             retorno.add(clientePJ);

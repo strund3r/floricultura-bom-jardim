@@ -6,11 +6,14 @@
 package apresentacao;
 
 import entidade.ClientePF;
+import java.awt.Component;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import negocio.NClientePF;
 
 /**
@@ -50,7 +53,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             for (ClientePF clientePF : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(clientePF.getIdentificador() + "");
+                conteudo.add(clientePF.getID()+ "");
                 conteudo.add(clientePF.getNome() + "");
                 conteudo.add(clientePF.getCpf()+ "");
                 conteudo.add(clientePF.getTelefone() + "");
@@ -78,7 +81,16 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblCliente = new javax.swing.JTable(){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();

@@ -26,7 +26,7 @@ public class NTipoProduto {
         if (parametro.getNome().isEmpty()) {
             throw new Exception("Ë necesário informar a descrição do tipo de produto!");
         }
-        if (parametro.getIdentificador() == 0) {
+        if (parametro.getID() == 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

@@ -28,8 +28,8 @@ public class PPedido {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " pedido (identificador, id_cliente, id_produto, quantidade) "
-                + " VALUES (?,?,?,?)";
+                + " pedido (id, cliente_id, produto_id) "
+                + " VALUES (?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -38,11 +38,11 @@ public class PPedido {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //Trocando os valores da ? por valores recebidos no método
-        prd.setInt(1, parametro.getIdentificador());
+        prd.setInt(1, parametro.getID());
         prd.setInt(2, parametro.getId_cliente());
         prd.setInt(3, parametro.getId_produto());
-        prd.setInt(4, parametro.getQuantidade());
-
+//        prd.setInt(4, parametro.getQuantidade());
+//
         prd.execute();
         cnn.close();
     }
@@ -52,10 +52,9 @@ public class PPedido {
         try {
             //Cria a instrução sql para a inserção de registros
             String sql = "UPDATE pedido SET"
-                    + " id_cliente = ?,"
-                    + " id_produto = ?, "
-                    + " quantidade = ?, "
-                    + " WHERE identificador = ?";
+                    + " cliente_id = ?,"
+                    + " produto_id = ?, "
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -66,8 +65,8 @@ public class PPedido {
             //Trocando os valores da ? por valores recebidos no método
             prd.setInt(1, parametro.getId_cliente());
             prd.setInt(2, parametro.getId_produto());
-            prd.setInt(3, parametro.getQuantidade());
-            prd.setInt(4, parametro.getIdentificador());
+//            prd.setInt(3, parametro.getQuantidade());
+            prd.setInt(4, parametro.getID());
 
             prd.execute();
             cnn.close();
@@ -80,7 +79,7 @@ public class PPedido {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM pedido "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -97,8 +96,8 @@ public class PPedido {
 
     public Pedido consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, cliente"
-                + " FROM pedido WHERE identificador = ?;";
+        String sql = "SELECT id, cliente_id"
+                + " FROM pedido WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -110,8 +109,8 @@ public class PPedido {
         Pedido retorno = new Pedido();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
-            retorno.setId_cliente(rs.getInt("cliente"));
+            retorno.setID(rs.getInt("id"));
+            retorno.setId_cliente(rs.getInt("cliente_id"));
         }
         return retorno;
     }
@@ -127,10 +126,10 @@ public class PPedido {
         while (rs.next()) {
             Pedido pedido = new Pedido();
 
-            pedido.setIdentificador(rs.getInt("identificador"));
-            pedido.setId_cliente(rs.getInt("id_cliente"));
-            pedido.setId_produto(rs.getInt("id_produto"));
-            pedido.setQuantidade(rs.getInt("quantidade"));
+            pedido.setID(rs.getInt("id"));
+            pedido.setId_cliente(rs.getInt("cliente_id"));
+            pedido.setId_produto(rs.getInt("produto_id"));
+//            pedido.setQuantidade(rs.getInt("quantidade"));
 //            TipoCliente tpcliente = new TipoCliente();
 //            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));
 //            clientePF.setTipoCliente(tpcliente);

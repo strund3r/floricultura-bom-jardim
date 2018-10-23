@@ -27,7 +27,7 @@ public class NTipoCliente {
         if (parametro.getDescricao().isEmpty()) {
             throw new Exception("Ë necesário informar a descrição do tipo de cliente!");
         }
-        if (parametro.getIdentificador() == 0) {
+        if (parametro.getID() == 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

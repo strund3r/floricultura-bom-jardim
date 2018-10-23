@@ -42,7 +42,7 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
             NClientePF negocio = new NClientePF();
             ClientePF clientePF = negocio.consultar(Integer.parseInt(codigo));
 
-            jTextFieldCodigo.setText(clientePF.getIdentificador() + "");
+            jTextFieldCodigo.setText(clientePF.getID()+ "");
             jTextFieldNome.setText(clientePF.getNome());
             jTextFieldCPFCNPJ.setText(clientePF.getCpf()+ "");
             jTextFieldTelefone.setText(clientePF.getTelefone()+ "");
@@ -256,7 +256,7 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
             ClientePF clientePF = new ClientePF();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                clientePF.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
+                clientePF.setID(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
             PTipoCliente ptc = new PTipoCliente();

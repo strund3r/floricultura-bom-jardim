@@ -44,7 +44,7 @@ public class PProduto {
         prd.setDouble(3, parametro.getCusto());
         prd.setDouble(4, parametro.getValorVenda());
         prd.setInt(5, parametro.getQuantidade());
-        prd.setObject(6, parametro.getTipoProduto().getIdentificador());
+        prd.setObject(6, parametro.getTipoProduto().getID());
 
         prd.execute();
         cnn.close();
@@ -60,8 +60,8 @@ public class PProduto {
                     + " custo = ?, "
                     + " valorvenda = ?"
                     + " quantidade = ?"
-                    + " identificador = ?"
-                    + " WHERE identificador = ?";
+                    + " id = ?"
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -75,7 +75,7 @@ public class PProduto {
             prd.setDouble(3, parametro.getCusto());
             prd.setDouble(4, parametro.getValorVenda());
             prd.setInt(5, parametro.getQuantidade());
-            prd.setObject(6, parametro.getTipoProduto().getIdentificador());
+            prd.setObject(6, parametro.getTipoProduto().getID());
 
             prd.execute();
             cnn.close();
@@ -88,7 +88,7 @@ public class PProduto {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM produto "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -105,8 +105,8 @@ public class PProduto {
 
     public Produto consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, descricao, custo,valorvenda, quantidade"
-                + " FROM produto WHERE identificador = ?;";
+        String sql = "SELECT id, nome, descricao, custo,valorvenda, quantidade"
+                + " FROM produto WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -118,13 +118,13 @@ public class PProduto {
         Produto retorno = new Produto();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
             retorno.setDescricao(rs.getString("descricao"));
             retorno.setCusto(rs.getDouble("custo"));
             retorno.setValorVenda(rs.getDouble("valorvenda"));
             retorno.setQuantidade(rs.getInt("quantidade"));
-            retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("identificador")));
+            retorno.setTipoProduto(new PTipoProduto().consultar(rs.getInt("id")));
         }
         return retorno;
     }
@@ -140,7 +140,7 @@ public class PProduto {
         while (rs.next()) {
             Produto produto = new Produto();
 
-            produto.setIdentificador(rs.getInt("identificador"));
+            produto.setID(rs.getInt("id"));
             produto.setNome(rs.getString("nome"));
             produto.setDescricao(rs.getString("descricao"));
             produto.setCusto(rs.getDouble("custo"));

@@ -60,8 +60,8 @@ public class PClientePF {
                     + " telefone = ?, "
                     + " endereco = ?, "
                     + " email = ?"
-                    + " identificador = ?"
-                    + " WHERE identificador = ?";
+                    + " id = ?"
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -75,7 +75,7 @@ public class PClientePF {
             prd.setString(3, parametro.getTelefone());
             prd.setString(4, parametro.getEndereco());
             prd.setString(5, parametro.getEmail());
-            prd.setObject(6, parametro.getTipoCliente().getIdentificador());
+            prd.setObject(6, parametro.getTipoCliente().getID());
 
             prd.execute();
             cnn.close();
@@ -88,7 +88,7 @@ public class PClientePF {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM clientepf "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -105,8 +105,8 @@ public class PClientePF {
 
     public ClientePF consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, cpf, endereco, telefone, email"
-                + " FROM clientePF WHERE identificador = ?;";
+        String sql = "SELECT id, nome, cpf, endereco, telefone, email"
+                + " FROM clientePF WHERE id = ?;";
 
 //        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class PClientePF {
         ClientePF retorno = new ClientePF();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setID(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setEndereco(rs.getString("endereco"));
@@ -140,14 +140,14 @@ public class PClientePF {
         while (rs.next()) {
             ClientePF clientePF = new ClientePF();
 
-            clientePF.setIdentificador(rs.getInt("identificador"));
+            clientePF.setID(rs.getInt("id"));
             clientePF.setNome(rs.getString("nome"));
             clientePF.setCpf(rs.getString("cpf"));
             clientePF.setEndereco(rs.getString("endereco"));
             clientePF.setTelefone(rs.getString("telefone"));
             clientePF.setEmail(rs.getString("email"));
             TipoCliente tpcliente = new TipoCliente();
-            tpcliente.setIdentificador(rs.getInt("identificador"));
+            tpcliente.setID(rs.getInt("id"));
             clientePF.setTipoCliente(tpcliente);
 
             retorno.add(clientePF);
