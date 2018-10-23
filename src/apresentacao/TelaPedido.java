@@ -6,12 +6,16 @@
 package apresentacao;
 
 import entidade.Pedido;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import negocio.NClientePF;
 import negocio.NPedido;
+import negocio.NProduto;
 
 /**
  *
@@ -35,6 +39,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
+         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         try {
 
             Vector<String> cabecalho = new Vector();
@@ -42,17 +47,22 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             cabecalho.add("Cliente");
 //            cabecalho.add("Quantidade");
             cabecalho.add("Produto");
+            cabecalho.add("Valor");
 
-            NPedido negocio = new NPedido();
+            NPedido negocioPedido = new NPedido();
             Vector linhas = new Vector();
+            NProduto negocioProduto = new NProduto();
+            NClientePF negocioCliente = new NClientePF();
+            
 
-            for (Pedido pedido : negocio.listar()) {
+            for (Pedido pedido : negocioPedido.listar()) {
                 Vector<String> conteudo = new Vector();
 
                 conteudo.add(pedido.getID() + "");
-                conteudo.add(pedido.getId_cliente() + "");
+                conteudo.add(negocioCliente.consultar(pedido.getId_cliente()).getNome() + "");
 //                conteudo.add(pedido.getQuantidade() + "");
-                conteudo.add(pedido.getId_produto() + "");
+                conteudo.add(negocioProduto.consultar(pedido.getId_produto()).getNome() + "");
+                conteudo.add(nf.format(pedido.getValor()) + "");
                 linhas.add(conteudo);
             }
             tblPedido.setModel(new DefaultTableModel(linhas, cabecalho));

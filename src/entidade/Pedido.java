@@ -15,6 +15,7 @@ public class Pedido {
     private int id_cliente;
 //    private int quantidade;
     private int id_produto;
+    private double valor;
 
     public Pedido(int id, int id_cliente, int id_produto) {
         this.id = id;
@@ -56,5 +57,21 @@ public class Pedido {
 
     public void setId_produto(int id_produto) {
         this.id_produto = id_produto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 }
