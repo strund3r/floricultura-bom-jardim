@@ -48,32 +48,11 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         carregarTabelaProduto();
     }
     
-//    public TelaCadPedido(JDesktopPane jDesktopPrincipal, String codigo) {
-//        this();
-//        this.jDesktopPrincipal = jDesktopPrincipal;
-//        //preencher a tela
-//        try {
-//            
-//            negocioClientePF = new NClientePF();
-//            clientePF = negocioClientePF.consultar(Integer.parseInt(codigo));
-//            negocioProduto = new NProduto();
-//            produto = negocioProduto.consultar(Integer.parseInt(codigo));
-//            
-//            jTextFieldCodigoCliente.setText(clientePF.getID()+ "");
-//            jTextFieldNomeCliente.setText(clientePF.getNome());
-//            jTextFieldProduto.setText(produto.getNome());
-//            jTextFieldValor.setText(Double.toString(produto.getValorVenda()));
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
-//    }
-    
     private void limpar() {
         jTextFieldCodigoCliente.setText("");
         jTextFieldCodigoPedido.setText("");
         jTextFieldNomeCliente.setText("");
         jTextFieldProduto.setText("");
-//        jTextFieldQuantidade.setText("");
         jTextFieldValor.setText("");
     }
 
@@ -131,7 +110,6 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -434,22 +412,14 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             if (jTextFieldProduto.getText().isEmpty()) {
                 throw new Exception("E necessário buscar um produto no cadastro.");
             }
-//            if (jTextFieldQuantidade.getText().isEmpty()) {
-//                throw new Exception("Informe a quantidade do pedido.");
-//            }
             Pedido pedido = new Pedido();
             
             if (!jTextFieldCodigoPedido.getText().isEmpty()) {
                 pedido.setID(Integer.parseInt(jTextFieldCodigoPedido.getText()));
             }
 
-//            negocioClientePF = new NClientePF();
-//            clientePF = negocioClientePF.consultar(Integer.parseInt(jTextFieldCodigoCliente.getText()));
-//            negocioProduto = new NProduto();
-//            produto = negocioProduto.consultar(Integer.parseInt(jTextFieldProduto.getText()));
             pedido.setId_cliente(Integer.parseInt(jTextFieldCodigoCliente.getText()));
             pedido.setId_produto(Integer.parseInt(jTextFieldCodigoProduto.getText()));
-//            pedido.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
 
             NPedido negocioPedido = new NPedido();
             

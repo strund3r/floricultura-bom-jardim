@@ -21,15 +21,15 @@ import java.util.logging.Logger;
  * @author luisf
  */
 public class PPedido {
-    
-     Connection cnn = util.Conexao.getConexao();
+
+    Connection cnn = util.Conexao.getConexao();
 
     public void incluir(Pedido parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " pedido (id, cliente_id, produto_id) "
-                + " VALUES (?,?,?)";
+                + " pedido (cliente_id, produto_id, valor) "
+                + " VALUES (?,?, ?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -41,6 +41,7 @@ public class PPedido {
         prd.setInt(1, parametro.getID());
         prd.setInt(2, parametro.getId_cliente());
         prd.setInt(3, parametro.getId_produto());
+        prd.setDouble(4, parametro.getValor());
 //        prd.setInt(4, parametro.getQuantidade());
 //
         prd.execute();
@@ -54,6 +55,7 @@ public class PPedido {
             String sql = "UPDATE pedido SET"
                     + " cliente_id = ?,"
                     + " produto_id = ?, "
+                    + " valor = ?, "
                     + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -65,8 +67,8 @@ public class PPedido {
             //Trocando os valores da ? por valores recebidos no método
             prd.setInt(1, parametro.getId_cliente());
             prd.setInt(2, parametro.getId_produto());
-//            prd.setInt(3, parametro.getQuantidade());
-            prd.setInt(4, parametro.getID());
+            prd.setInt(3, parametro.getID());
+            prd.setDouble(4, parametro.getValor());
 
             prd.execute();
             cnn.close();
@@ -111,6 +113,7 @@ public class PPedido {
         if (rs.next()) {
             retorno.setID(rs.getInt("id"));
             retorno.setId_cliente(rs.getInt("cliente_id"));
+            retorno.setValor(rs.getDouble("valor"));
         }
         return retorno;
     }
@@ -129,6 +132,7 @@ public class PPedido {
             pedido.setID(rs.getInt("id"));
             pedido.setId_cliente(rs.getInt("cliente_id"));
             pedido.setId_produto(rs.getInt("produto_id"));
+            pedido.setValor(rs.getDouble("valor"));
 //            pedido.setQuantidade(rs.getInt("quantidade"));
 //            TipoCliente tpcliente = new TipoCliente();
 //            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));

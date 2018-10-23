@@ -24,10 +24,10 @@ public class NPedido {
 
     public void salvar(Pedido parametro) throws SQLException, Exception {
         if (parametro.getId_produto() == 0) {
-            throw new Exception("Ë necessário informar o produto!");
+            throw new Exception("Ë necessário selecionar um produto!");
         }
         if (parametro.getId_cliente() == 0) {
-            throw new Exception("Ë necessário informar um cliente!");
+            throw new Exception("Ë necessário selecionar um cliente!");
         }
 //        if (parametro.getQuantidade() == 0) {
 //            throw new Exception("Ë necessário informar a quantidade!");
