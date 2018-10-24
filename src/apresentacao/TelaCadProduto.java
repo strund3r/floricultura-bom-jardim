@@ -256,7 +256,6 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
             }
 
             PTipoProduto ptp = new PTipoProduto();
-            TipoProduto tp = new TipoProduto();
 
             produto.setNome(jTextFieldNome.getText());
             produto.setDescricao(jTextFieldDescricao.getText());
