@@ -80,7 +80,7 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         jTextFieldCodigo1.setEditable(false);
 
         try {
-            jFormattedTextFieldVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
