@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFinanceiro;
+import util.Data;
 
 /**
  *
@@ -38,9 +39,10 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             Financeiro titulo = negocio.consultar(Integer.parseInt(codigo));
 
             jTextFieldCodigo1.setText(titulo.getIdentificador()+ "");
+            jTextFieldCliente1.setText(titulo.getNomeCliente() + "");
             jTextFieldDescricao1.setText(titulo.getDescricaoTitulo());
-            jFormattedValor1.setText(titulo.getValorTitulo()+ "");
-            jFormattedVencimento1.setText(titulo.getDataVencimentoTitulo()+ "");
+            jFormattedValor1.setText(titulo.getValorTitulo()+ "4343");
+            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo()));
             jComboBoxStatus1.setSelectedItem(titulo.getStatusTitulo()+ "");
 
         } catch (SQLException ex) {
@@ -112,7 +114,7 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         });
 
         try {
-            jFormattedValor1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$##.###,##")));
+            jFormattedValor1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####.##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -277,8 +279,8 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             titulo.setNomeCliente(jTextFieldCliente1.getText());
             titulo.setDescricaoTitulo(jTextFieldDescricao1.getText());
             titulo.setValorTitulo(Double.parseDouble(jFormattedValor1.getText()));
-            titulo.setDataVencimentoTitulo(jFormattedVencimento1.getText());
-            titulo.setStatusTitulo((int) jComboBoxStatus1.getSelectedItem());
+            titulo.setDataVencimentoTitulo(Data.formatarData(jFormattedVencimento1.getText()));
+            titulo.setStatusTitulo(jComboBoxStatus1.getSelectedIndex());
 
             NFinanceiro negocio = new NFinanceiro();
 

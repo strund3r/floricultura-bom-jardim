@@ -1,10 +1,11 @@
-
 package apresentacao;
 
 import entidade.Financeiro;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFinanceiro;
+import util.Data;
+
 /**
  *
  * @author arthu
@@ -43,8 +44,8 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTextFieldCodigo1 = new javax.swing.JTextField();
-        jFormattedTextFieldVencimento = new javax.swing.JFormattedTextField();
         jFormattedTextFieldValor = new javax.swing.JTextField();
+        jFormattedTextFieldVencimento = new javax.swing.JFormattedTextField();
         btnVoltar1 = new javax.swing.JButton();
         btnLimpar1 = new javax.swing.JButton();
 
@@ -79,22 +80,17 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
 
         jTextFieldCodigo1.setEditable(false);
 
-        try {
-            jFormattedTextFieldVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldVencimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldVencimentoActionPerformed(evt);
-            }
-        });
-
         jFormattedTextFieldValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldValorActionPerformed(evt);
             }
         });
+
+        try {
+            jFormattedTextFieldVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,12 +120,12 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldValor)
+                                .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel11)
-                                .addGap(32, 32, 32)
-                                .addComponent(jFormattedTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldVencimento)
+                                .addGap(8, 8, 8)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -154,8 +150,8 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addComponent(jFormattedTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -204,7 +200,6 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
 
     private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
         try {
-
             if (jTextFieldCliente.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o nome do cliente.");
             }
@@ -225,13 +220,12 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
             if (!jTextFieldCodigo1.getText().isEmpty()) {
                 titulo.setIdentificador(Integer.parseInt(jTextFieldCodigo1.getText()));
             }
-
+            
             titulo.setNomeCliente(jTextFieldCliente.getText());
-            titulo.setDescricaoTitulo(jTextFieldDescricao.getText()); 
+            titulo.setDescricaoTitulo(jTextFieldDescricao.getText());
             titulo.setValorTitulo(Double.parseDouble(jFormattedTextFieldValor.getText()));
-            titulo.setDataVencimentoTitulo(jFormattedTextFieldVencimento.getText());
-//            JOptionPane.showMessageDialog(null, jComboBoxStatus.getSelectedItem());
-            titulo.setStatusTitulo((int) jComboBoxStatus.getSelectedIndex());
+            titulo.setDataVencimentoTitulo(Data.formatarData(jFormattedTextFieldVencimento.getText()));
+            titulo.setStatusTitulo(jComboBoxStatus.getSelectedIndex());
 
             NFinanceiro negocio = new NFinanceiro();
 
@@ -265,10 +259,6 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
     private void jFormattedTextFieldValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldValorActionPerformed
-
-    private void jFormattedTextFieldVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldVencimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldVencimentoActionPerformed
 
     public void limpar() {
 

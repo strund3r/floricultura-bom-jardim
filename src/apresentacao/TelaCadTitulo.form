@@ -94,12 +94,12 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jTextFieldDescricao" min="-2" pref="333" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jFormattedTextFieldValor" max="32767" attributes="0"/>
+                                  <Component id="jFormattedTextFieldValor" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextFieldVencimento" min="-2" pref="70" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldVencimento" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -133,8 +133,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextFieldVencimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jFormattedTextFieldValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFormattedTextFieldVencimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
@@ -214,20 +214,17 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldVencimento">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##-##-####" subtype="-1" type="5"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldVencimentoActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JTextField" name="jFormattedTextFieldValor">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldValorActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldVencimento">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="##/##/####" subtype="-1" type="5"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

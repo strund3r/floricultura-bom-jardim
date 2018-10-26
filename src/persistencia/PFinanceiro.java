@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class PFinanceiro {
     public void incluir(Financeiro parametro) throws SQLException {
 
         //Cria a intrução sql para a inserção de registros 
-        String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, identificador, nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -24,12 +25,12 @@ public class PFinanceiro {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //trocando os valores da ? por valores recebidos no método
-        prd.setDate(1, Date.valueOf(parametro.getDataVencimentoTitulo()));
+        
+        prd.setDate(1, parametro.getDataVencimentoTitulo());
         prd.setString(2, parametro.getDescricaoTitulo());
-        prd.setInt(3, parametro.getIdentificador());
-        prd.setString(4, parametro.getNomeCliente());
-        prd.setInt(5, parametro.getStatusTitulo());
-        prd.setDouble(6, parametro.getValorTitulo());
+        prd.setString(3, parametro.getNomeCliente());
+        prd.setInt(4, parametro.getStatusTitulo());
+        prd.setDouble(5, parametro.getValorTitulo());
 
         prd.execute();
         cnn.close();
@@ -55,7 +56,7 @@ public class PFinanceiro {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //Trocando os valores da ? por valores recebidos no método
-        prd.setString(1, parametro.getDataVencimentoTitulo());
+        prd.setDate(1, (Date) parametro.getDataVencimentoTitulo());
         prd.setString(2, parametro.getDescricaoTitulo());
         prd.setInt(3, parametro.getIdentificador());
         prd.setString(4, parametro.getNomeCliente());
@@ -99,7 +100,7 @@ public class PFinanceiro {
 
         if (rs.next()) {
 
-            retorno.setDataVencimentoTitulo(rs.getString("datavencimentotitulo"));
+            retorno.setDataVencimentoTitulo(rs.getDate("datavencimentotitulo"));
             retorno.setDescricaoTitulo(rs.getString("descricaotitulo"));
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNomeCliente(rs.getString("nomecliente"));
@@ -122,7 +123,7 @@ public class PFinanceiro {
         while (rs.next()) {
             Financeiro titulo = new Financeiro();
 
-            titulo.setDataVencimentoTitulo(rs.getString("datavencimentotitulo"));
+            titulo.setDataVencimentoTitulo(rs.getDate("datavencimentotitulo"));
             titulo.setDescricaoTitulo(rs.getString("descricaotitulo"));
             titulo.setIdentificador(rs.getInt("identificador"));
             titulo.setNomeCliente(rs.getString("nomecliente"));
