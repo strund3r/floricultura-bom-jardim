@@ -2,12 +2,10 @@ package persistencia;
 
 import entidade.Financeiro;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +29,7 @@ public class PFinanceiro {
         prd.setString(3, parametro.getNomeCliente());
         prd.setInt(4, parametro.getStatusTitulo());
         prd.setDouble(5, parametro.getValorTitulo());
+        
 
         prd.execute();
         cnn.close();
@@ -43,7 +42,6 @@ public class PFinanceiro {
         String sql = "UPDATE titulo SET"
                 + " datavencimentotitulo = ?,"
                 + " descricaotitulo = ?,"
-                + " identificador = ?,"
                 + " nomecliente = ?,"
                 + " statustitulo = ?,"
                 + " valortitulo = ?"
@@ -56,12 +54,12 @@ public class PFinanceiro {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //Trocando os valores da ? por valores recebidos no método
-        prd.setDate(1, (Date) parametro.getDataVencimentoTitulo());
+        prd.setDate(1, parametro.getDataVencimentoTitulo());
         prd.setString(2, parametro.getDescricaoTitulo());
-        prd.setInt(3, parametro.getIdentificador());
-        prd.setString(4, parametro.getNomeCliente());
-        prd.setInt(5, parametro.getStatusTitulo());
-        prd.setDouble(6, parametro.getValorTitulo());
+        prd.setString(3, parametro.getNomeCliente());
+        prd.setInt(4, parametro.getStatusTitulo());
+        prd.setDouble(5, parametro.getValorTitulo());
+        prd.setInt(6, parametro.getIdentificador());
 
         prd.execute();
         cnn.close();
