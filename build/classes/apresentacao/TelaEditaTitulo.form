@@ -151,9 +151,6 @@
         <Component class="javax.swing.JTextField" name="jTextFieldCliente1">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldDescricao1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

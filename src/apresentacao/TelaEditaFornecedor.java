@@ -86,8 +86,6 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("FORNECEDOR:");
 
-        jTextFieldEndereco1.setEditable(false);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("ENDEREÇO:");
 

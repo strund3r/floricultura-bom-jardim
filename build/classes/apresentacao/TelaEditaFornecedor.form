@@ -134,9 +134,6 @@
         <Component class="javax.swing.JTextField" name="jTextFieldFornecedor1">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldEndereco1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

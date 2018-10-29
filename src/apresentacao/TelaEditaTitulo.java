@@ -92,8 +92,6 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("CLIENTE:");
 
-        jTextFieldDescricao1.setEditable(false);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("DESCRIÇÃO:");
 

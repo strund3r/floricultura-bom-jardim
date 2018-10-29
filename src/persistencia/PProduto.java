@@ -56,7 +56,7 @@ public class PProduto {
                     + " descricao = ?,"
                     + " custo = ?, "
                     + " valorvenda = ?,"
-                    + " quantidade = ?,"
+                    + " quantidade = ?"
                     + " WHERE identificador = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões

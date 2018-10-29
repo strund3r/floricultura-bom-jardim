@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package apresentacao;
 
 import entidade.Produto;
@@ -10,20 +6,14 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NProduto;
 
-/**
- *
- * @author luisf
- */
+
 public class TelaCadProduto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaCadProduto
-     */
+    
     JDesktopPane jDesktopPrincipal;
 
     public TelaCadProduto() {
         initComponents();
-        //carregarCombo();
     }
 
     public TelaCadProduto(JDesktopPane jDesktopPrincipal) {
@@ -32,12 +22,14 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
     }
 
     private void limpar() {
+        
         jTextFieldCodigo.setText("");
         jTextFieldNome.setText("");
         jTextFieldDescricao.setText("");
         jTextFieldCusto.setText("");
         jTextFieldValorVenda.setText("");
         jTextFieldQuantidade.setText("");
+        
     }
 
     /**
@@ -226,7 +218,7 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
             Produto produto = new Produto();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                produto.setID(Integer.parseInt(jTextFieldCodigo.getText()));
+                produto.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
             produto.setNome(jTextFieldNome.getText());

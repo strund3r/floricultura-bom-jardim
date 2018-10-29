@@ -98,7 +98,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             for (Produto produto : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(produto.getID() + "");
+                conteudo.add(produto.getIdentificador() + "");
                 conteudo.add(produto.getNome() + "");
                 conteudo.add(nf.format(produto.getValorVenda()));
                 conteudo.add(produto.getQuantidade() + "");
