@@ -6,12 +6,9 @@
 package apresentacao;
 
 import entidade.Produto;
-import entidade.TipoProduto;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NProduto;
-import negocio.NTipoProduto;
-import persistencia.PTipoProduto;
 
 /**
  *
@@ -23,10 +20,10 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
      * Creates new form TelaCadProduto
      */
     JDesktopPane jDesktopPrincipal;
-    
+
     public TelaCadProduto() {
         initComponents();
-        carregarCombo();
+        //carregarCombo();
     }
 
     public TelaCadProduto(JDesktopPane jDesktopPrincipal) {
@@ -41,18 +38,6 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
         jTextFieldCusto.setText("");
         jTextFieldValorVenda.setText("");
         jTextFieldQuantidade.setText("");
-    }
-    
-       private void carregarCombo() {
-        try {
-
-            for (TipoProduto tp : new NTipoProduto().listar()) {
-                jComboTipoProd.addItem(tp.getNome());
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro");
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
 
     /**
@@ -74,9 +59,7 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldValorVenda = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboTipoProd = new javax.swing.JComboBox<>();
         jTextFieldQuantidade = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
@@ -102,9 +85,6 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("QUANTIDADE..:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Tipo de produto.:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("CÓDIGO:");
@@ -137,16 +117,13 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(49, 49, 49)
-                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -173,13 +150,9 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82))
         );
 
@@ -249,20 +222,18 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
             if (jTextFieldQuantidade.getText().isEmpty()) {
                 throw new Exception("E necessário preencher a quantidade do produto em estoque.");
             }
+
             Produto produto = new Produto();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
                 produto.setID(Integer.parseInt(jTextFieldCodigo.getText()));
             }
 
-            PTipoProduto ptp = new PTipoProduto();
-
             produto.setNome(jTextFieldNome.getText());
             produto.setDescricao(jTextFieldDescricao.getText());
             produto.setCusto(Double.parseDouble(jTextFieldCusto.getText()));
             produto.setValorVenda(Double.parseDouble(jTextFieldValorVenda.getText()));
             produto.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
-            produto.setTipoProduto(ptp.consultar(jComboTipoProd.getSelectedIndex()));
 
             NProduto negocio = new NProduto();
 
@@ -284,14 +255,12 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> jComboTipoProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldCusto;

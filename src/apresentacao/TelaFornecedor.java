@@ -38,6 +38,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
+        
         try {
 
             Vector<String> cabecalho = new Vector();
@@ -180,11 +181,13 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         try {
+            
             TelaCadFornecedor telaCadFornecedor = new TelaCadFornecedor(jDesktopPrincipal);
             jDesktopPrincipal.add(telaCadFornecedor);
             telaCadFornecedor.setLocation(20, 15);
             telaCadFornecedor.setVisible(true);
             this.dispose();
+            
         } catch (Exception e) {
             e.printStackTrace();
             

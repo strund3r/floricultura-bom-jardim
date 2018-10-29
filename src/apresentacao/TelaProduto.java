@@ -7,11 +7,10 @@ package apresentacao;
 
 import entidade.Produto;
 import java.awt.Component;
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -39,12 +38,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
-        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
         try {
 
             Vector<String> cabecalho = new Vector();
-            cabecalho.add("Código");
+            
+            cabecalho.add("Identificador");
             cabecalho.add("Nome");
             cabecalho.add("Valor");
             cabecalho.add("Quantidade");
@@ -56,14 +55,16 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             for (Produto produto : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(produto.getID() + "");
+                conteudo.add(produto.getIdentificador() + "");
                 conteudo.add(produto.getNome() + "");
-                conteudo.add(nf.format(produto.getValorVenda()));
+                conteudo.add(produto.getValorVenda() + "");
                 conteudo.add(produto.getQuantidade() + "");
                 conteudo.add(produto.getDescricao() + "");
                 linhas.add(conteudo);
             }
             tblProduto.setModel(new DefaultTableModel(linhas, cabecalho));
+            
+            tblProduto.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -94,7 +95,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnNovoTipoProd = new javax.swing.JButton();
 
         setTitle("Produtos");
         setPreferredSize(new java.awt.Dimension(560, 350));
@@ -143,13 +143,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovoTipoProd.setText("Novo Tipo");
-        btnNovoTipoProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoTipoProdActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,11 +152,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnVoltar)
-                        .addGap(90, 90, 90)
-                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNovoTipoProd)
-                        .addGap(80, 80, 80)
+                        .addComponent(btnEditar)
+                        .addGap(169, 169, 169)
                         .addComponent(btnNovo)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -179,8 +170,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnNovo)
-                    .addComponent(btnEditar)
-                    .addComponent(btnNovoTipoProd))
+                    .addComponent(btnEditar))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -200,20 +190,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             this.dispose();
         } catch (Exception e) {
             e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, e.getMessage());
+            
         }
     }//GEN-LAST:event_btnNovoActionPerformed
-    private void btnNovoTipoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoTipoProdActionPerformed
-        try {
-            TelaCadTipoProduto telaCadTipoProduto = new TelaCadTipoProduto(jDesktopPrincipal);
-            jDesktopPrincipal.add(telaCadTipoProduto);
-            telaCadTipoProduto.setLocation(20, 15);
-            telaCadTipoProduto.setVisible(true);
-            this.dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_btnNovoTipoProdActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         try {
@@ -233,7 +212,6 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnNovoTipoProd;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
