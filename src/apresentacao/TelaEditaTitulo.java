@@ -39,10 +39,10 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             Financeiro titulo = negocio.consultar(Integer.parseInt(codigo));
 
             jTextFieldCodigo1.setText(titulo.getIdentificador()+ "");
-            jTextFieldCliente1.setText(titulo.getNomeCliente());
+            jTextFieldCliente1.setText(titulo.getNomeCliente()+ "");
             jTextFieldDescricao1.setText(titulo.getDescricaoTitulo());
             jFormattedValor1.setText(titulo.getValorTitulo() + "");
-            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo()));
+            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo())+ "");
             jComboBoxStatus1.setSelectedIndex(titulo.getStatusTitulo());
 
         } catch (SQLException ex) {

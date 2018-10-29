@@ -6,6 +6,7 @@
 package apresentacao;
 
 import entidade.Fornecedor;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFornecedor;
@@ -25,11 +26,30 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    TelaEditaFornecedor(JDesktopPane jDesktopPrincipal, String codigo) {
+    TelaEditaFornecedor(JDesktopPane jDesktopPrincipal) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
     }
+    TelaEditaFornecedor(JDesktopPane jDesktopPrincipal, String codigo) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+        //preencher a tela
+        try {
 
+            NFornecedor negocio = new NFornecedor();
+            Fornecedor fornecedor = negocio.consultar(Integer.parseInt(codigo));
+
+            jTextFieldCodigo1.setText(fornecedor.getIdentificador()+ "");
+            jTextFieldFornecedor1.setText(fornecedor.getNome());
+            jTextFieldEndereco1.setText(fornecedor.getEndereco());
+            jFormattedCnpj1.setText(fornecedor.getCnpj()+ "");
+            jFormattedTelefone1.setText(fornecedor.getTelefone()+ "");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,8 +69,8 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldCodigo1 = new javax.swing.JTextField();
-        jFormattedTelefone1 = new javax.swing.JFormattedTextField();
         jFormattedCnpj1 = new javax.swing.JFormattedTextField();
+        jFormattedTelefone1 = new javax.swing.JFormattedTextField();
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
 
@@ -88,16 +108,12 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
         });
 
         try {
-            jFormattedTelefone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####.##")));
+            jFormattedCnpj1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        try {
-            jFormattedCnpj1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jFormattedTelefone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#########"))));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,15 +129,15 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jFormattedTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFormattedCnpj1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                     .addComponent(jTextFieldEndereco1)
                     .addComponent(jTextFieldFornecedor1)
                     .addComponent(jTextFieldCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,9 +157,9 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jFormattedTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedCnpj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jFormattedTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -215,7 +231,7 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
             fornecedor.setNome(jTextFieldFornecedor1.getText());
             fornecedor.setEndereco(jTextFieldEndereco1.getText());
             fornecedor.setTelefone(Integer.parseInt(jFormattedTelefone1.getText()));
-            fornecedor.setCnpj(Integer.parseInt(jFormattedCnpj1.getText()));
+            fornecedor.setCnpj(Long.parseLong(jFormattedCnpj1.getText()));
             
             NFornecedor negocio = new NFornecedor();
 
@@ -226,7 +242,6 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -248,7 +263,6 @@ public class TelaEditaFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
         limpar();
     }//GEN-LAST:event_btnLimparActionPerformed
 

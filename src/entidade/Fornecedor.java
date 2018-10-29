@@ -7,7 +7,7 @@ public class Fornecedor {
     private String nome;
     private String endereco;
     private int telefone;
-    private int cnpj;
+    private long cnpj;
 
     public int getIdentificador() {
         return identificador;
@@ -41,11 +41,11 @@ public class Fornecedor {
         this.telefone = telefone;
     }
 
-    public int getCnpj() {
+    public long getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
     }
     

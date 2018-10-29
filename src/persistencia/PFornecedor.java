@@ -28,7 +28,7 @@ public class PFornecedor {
         prd.setString(1, parametro.getNome());
         prd.setString(2, parametro.getEndereco());
         prd.setInt(3, parametro.getTelefone());
-        prd.setInt(4, parametro.getCnpj());
+        prd.setLong(4, parametro.getCnpj());
         
         prd.execute();
         cnn.close();
@@ -39,7 +39,6 @@ public class PFornecedor {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "UPDATE fornecedor SET"
-                + " identificador = ?,"
                 + " nome = ?,"
                 + " endereco = ?,"
                 + " telefone = ?,"
@@ -54,11 +53,11 @@ public class PFornecedor {
 
         //Trocando os valores da ? por valores recebidos no método
         
-        prd.setInt(1, parametro.getIdentificador());
-        prd.setString(2, parametro.getNome());
-        prd.setString(3, parametro.getEndereco());
-        prd.setInt(4, parametro.getTelefone());
-        prd.setInt(5, parametro.getCnpj());
+        prd.setString(1, parametro.getNome());
+        prd.setString(2, parametro.getEndereco());
+        prd.setInt(3, parametro.getTelefone());
+        prd.setLong(4, parametro.getCnpj());
+        prd.setInt(5, parametro.getIdentificador());
 
         prd.execute();
         cnn.close();
@@ -101,7 +100,7 @@ public class PFornecedor {
             retorno.setNome(rs.getString("nome"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getInt("telefone"));
-            retorno.setCnpj(rs.getInt("cnpj"));
+            retorno.setCnpj(rs.getLong("cnpj"));
 
         }
 
@@ -123,7 +122,7 @@ public class PFornecedor {
             fornecedor.setNome(rs.getString("nome"));
             fornecedor.setEndereco(rs.getString("endereco"));
             fornecedor.setTelefone(rs.getInt("telefone"));
-            fornecedor.setCnpj(rs.getInt("cnpj"));
+            fornecedor.setCnpj(rs.getLong("cnpj"));
             
             retorno.add(fornecedor);
         }

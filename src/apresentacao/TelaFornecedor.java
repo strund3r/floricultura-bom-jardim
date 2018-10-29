@@ -187,7 +187,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
             this.dispose();
         } catch (Exception e) {
             e.printStackTrace();
-            //            JOptionPane.showMessageDialog(null, e.getMessage());
+            
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 
