@@ -33,10 +33,14 @@ public class NProduto {
         if (parametro.getValorVenda()<= 0 ){
             throw new Exception("Ë necessário informar um preço de venda!");
         }
-        if (parametro.getTipoProduto()== null) {
-            throw new Exception("Ë necessário informar o tipo do produto!");
+        if (parametro.getDescricao().isEmpty()){
+            throw new Exception("É necessário informar a descrição!");
         }
-        if (parametro.getID() == 0) {
+        if (parametro.getQuantidade() == 0.0){
+            throw new Exception("É necessário informar a quantidade!");
+        }
+        
+        if (parametro.getIdentificador() == 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

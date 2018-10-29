@@ -47,14 +47,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
-        btnFornecedor = new javax.swing.JButton();
         btnTitulo = new javax.swing.JButton();
+        jButtonFornecedor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão da Floricultura");
-        setPreferredSize(new java.awt.Dimension(700, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 600));
 
@@ -102,12 +101,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/038bushes.png"))); // NOI18N
-        btnFornecedor.setText("Fornecedor");
-        btnFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
         btnTitulo.setText("Título");
         btnTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,12 +108,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonFornecedor.setText("Fornecedor");
+        jButtonFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFornecedorActionPerformed(evt);
+            }
+        });
+
         jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPrincipal.setLayer(btnFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(jButtonFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
@@ -128,15 +128,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPedido)
-                    .addComponent(btnFornecedor))
+                .addComponent(btnPedido)
                 .addGap(43, 43, 43)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(44, 44, 44)
-                .addComponent(btnProduto)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addComponent(btnRelatorio)
                 .addGap(57, 57, 57))
@@ -152,8 +152,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnProduto))
                 .addGap(39, 39, 39)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(jButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -237,6 +237,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnTituloActionPerformed
+
+    private void jButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorActionPerformed
+        // TODO add your handling code here:
+        try {
+            TelaFornecedor telaFornecedor = new TelaFornecedor(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaFornecedor);
+            telaFornecedor.setLocation(15, 15);
+            telaFornecedor.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonFornecedorActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -274,11 +287,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
-    private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnTitulo;
+    private javax.swing.JButton jButtonFornecedor;
     private javax.swing.JDesktopPane jDesktopPrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

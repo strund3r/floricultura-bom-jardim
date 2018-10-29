@@ -1,10 +1,11 @@
-
 package apresentacao;
 
 import entidade.Financeiro;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFinanceiro;
+import util.Data;
+
 /**
  *
  * @author arthu
@@ -12,16 +13,17 @@ import negocio.NFinanceiro;
 public class TelaCadTitulo extends javax.swing.JInternalFrame {
 
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
+    
+    
 
     public TelaCadTitulo() {
         initComponents();
     }
-
+    
     TelaCadTitulo(JDesktopPane jDesktopPrincipal) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +46,7 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextFieldCodigo1 = new javax.swing.JTextField();
         jFormattedTextFieldVencimento = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldValor = new javax.swing.JTextField();
+        jFormattedTextFieldValor = new javax.swing.JFormattedTextField();
         btnVoltar1 = new javax.swing.JButton();
         btnLimpar1 = new javax.swing.JButton();
 
@@ -69,10 +71,10 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("VENCIMENTO:");
 
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indefinido", "A Pagar", "Pago", "A Receber" }));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("STATUS DO TÍTULO");
+        jLabel13.setText("STATUS DO TÍTULO:");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("CÓDIGO:");
@@ -84,17 +86,6 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldVencimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldVencimentoActionPerformed(evt);
-            }
-        });
-
-        jFormattedTextFieldValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldValorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,8 +101,8 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
                         .addComponent(jTextFieldCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -124,12 +115,12 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldValor)
-                                .addGap(18, 18, 18)
+                                .addComponent(jFormattedTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)
-                                .addGap(32, 32, 32)
-                                .addComponent(jFormattedTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldVencimento)
+                                .addGap(8, 8, 8)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -204,7 +195,6 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
 
     private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
         try {
-
             if (jTextFieldCliente.getText().isEmpty()) {
                 throw new Exception("E necessário preencher o nome do cliente.");
             }
@@ -225,13 +215,12 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
             if (!jTextFieldCodigo1.getText().isEmpty()) {
                 titulo.setIdentificador(Integer.parseInt(jTextFieldCodigo1.getText()));
             }
-
+            
             titulo.setNomeCliente(jTextFieldCliente.getText());
-            titulo.setDescricaoTitulo(jTextFieldDescricao.getText()); 
+            titulo.setDescricaoTitulo(jTextFieldDescricao.getText());
             titulo.setValorTitulo(Double.parseDouble(jFormattedTextFieldValor.getText()));
-            titulo.setDataVencimentoTitulo(jFormattedTextFieldVencimento.getText());
-//            JOptionPane.showMessageDialog(null, jComboBoxStatus.getSelectedItem());
-            titulo.setStatusTitulo((int) jComboBoxStatus.getSelectedIndex());
+            titulo.setDataVencimentoTitulo(Data.formatarData(jFormattedTextFieldVencimento.getText()));
+            titulo.setStatusTitulo(jComboBoxStatus.getSelectedIndex());
 
             NFinanceiro negocio = new NFinanceiro();
 
@@ -262,14 +251,6 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         limpar();
     }//GEN-LAST:event_btnLimpar1ActionPerformed
 
-    private void jFormattedTextFieldValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldValorActionPerformed
-
-    private void jFormattedTextFieldVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldVencimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldVencimentoActionPerformed
-
     public void limpar() {
 
         jFormattedTextFieldVencimento.setText("");
@@ -287,7 +268,7 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvar1;
     private javax.swing.JButton btnVoltar1;
     private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JTextField jFormattedTextFieldValor;
+    private javax.swing.JFormattedTextField jFormattedTextFieldValor;
     private javax.swing.JFormattedTextField jFormattedTextFieldVencimento;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
