@@ -63,6 +63,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
             tblCliente.setModel(new DefaultTableModel(linhas, cabecalho));
 
+            tblCliente.setAutoCreateRowSorter(true);
             tblCliente.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {

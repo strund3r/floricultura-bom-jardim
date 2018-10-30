@@ -23,7 +23,7 @@ public class Conexao {
         try {
             Class.forName("org.postgresql.Driver");
 
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/floricultura_novo", "arthur", "123456");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/flor", "postgres", "123456");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);

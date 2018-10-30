@@ -134,9 +134,6 @@ public class PPedido {
             pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
 //            pedido.setQuantidade(rs.getInt("quantidade"));
-//            TipoCliente tpcliente = new TipoCliente();
-//            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));
-//            clientePF.setTipoCliente(tpcliente);
 
             retorno.add(pedido);
         }
