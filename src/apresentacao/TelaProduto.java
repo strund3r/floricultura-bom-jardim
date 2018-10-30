@@ -82,7 +82,8 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable(){
+        tblProduto = new javax.swing.JTable()
+        {
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);

@@ -157,7 +157,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
                     .addComponent(btnVoltar)
                     .addComponent(btnNovo)
                     .addComponent(btnEditar))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

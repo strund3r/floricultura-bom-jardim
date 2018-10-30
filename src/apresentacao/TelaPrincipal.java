@@ -54,8 +54,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão da Floricultura");
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(700, 600));
+        setSize(new java.awt.Dimension(1000, 800));
 
         jDesktopPrincipal.setPreferredSize(new java.awt.Dimension(1200, 1000));
 
@@ -101,14 +102,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/030-fertilizer.png"))); // NOI18N
         btnTitulo.setText("Título");
+        btnTitulo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTitulo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTituloActionPerformed(evt);
             }
         });
 
+        jButtonFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/041-fruit.png"))); // NOI18N
         jButtonFornecedor.setText("Fornecedor");
+        jButtonFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFornecedorActionPerformed(evt);
@@ -126,25 +136,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
         jDesktopPrincipalLayout.setHorizontalGroup(
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+            .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addComponent(btnPedido)
                 .addGap(43, 43, 43)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTitulo))
                 .addGap(44, 44, 44)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonFornecedor))
                 .addGap(38, 38, 38)
                 .addComponent(btnRelatorio)
-                .addGap(57, 57, 57))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jDesktopPrincipalLayout.setVerticalGroup(
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(121, 121, 121)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRelatorio)
                     .addComponent(btnPedido)
@@ -152,9 +162,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnProduto))
                 .addGap(39, 39, 39)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(jButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonFornecedor))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Sobre");
@@ -171,11 +181,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
 
         pack();
