@@ -470,20 +470,8 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         try {
             
-            tblCliente.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    String data = (String) tblCliente.getModel().getValueAt(
-                            tblCliente.getSelectedRow(), tblCliente.getSelectedColumn());
-                    if (jTextFieldCodigoCliente.getText().equals(""))  {
-                        jTextFieldCodigoCliente.setText(data);
-                    }
-                    if (jTextFieldNomeCliente.getText().equals(""))  {
-                        jTextFieldNomeCliente.setText(data);
-                    }
-                }
-            });
-//            jTextFieldNomeCliente.setText(tblCliente.getValueAt(0, 1).toString());
+            jTextFieldCodigoCliente.setText(tblCliente.getValueAt(tblCliente.getSelectedRow(),tblCliente.getSelectedColumn()).toString());
+            jTextFieldNomeCliente.setText(tblCliente.getValueAt(tblCliente.getSelectedRow(),tblCliente.getSelectedColumn()).toString());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
