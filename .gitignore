@@ -1,1 +1,11 @@
-/dist/
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# DB connection file
+src/util/Conexao.java
+
+# Private files
+nbproject/private/*
