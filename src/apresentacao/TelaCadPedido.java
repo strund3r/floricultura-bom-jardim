@@ -9,6 +9,8 @@ import entidade.ClientePF;
 import entidade.Pedido;
 import entidade.Produto;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
@@ -53,6 +55,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         jTextFieldCodigoPedido.setText("");
         jTextFieldNomeCliente.setText("");
         jTextFieldProduto.setText("");
+        jTextFieldCodigoProduto.setText("");
         jTextFieldValor.setText("");
     }
 
@@ -178,6 +181,11 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -461,8 +469,21 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
 
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         try {
-            jTextFieldCodigoCliente.setText(tblCliente.getValueAt(0, 0).toString());
-            jTextFieldNomeCliente.setText(tblCliente.getValueAt(0, 1).toString());
+            
+            tblCliente.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    String data = (String) tblCliente.getModel().getValueAt(
+                            tblCliente.getSelectedRow(), tblCliente.getSelectedColumn());
+                    if (jTextFieldCodigoCliente.getText().equals(""))  {
+                        jTextFieldCodigoCliente.setText(data);
+                    }
+                    if (jTextFieldNomeCliente.getText().equals(""))  {
+                        jTextFieldNomeCliente.setText(data);
+                    }
+                }
+            });
+//            jTextFieldNomeCliente.setText(tblCliente.getValueAt(0, 1).toString());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -477,6 +498,10 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_tblProdutoMouseClicked
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;

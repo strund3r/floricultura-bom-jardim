@@ -57,7 +57,7 @@ public class PProduto {
                     + " custo = ?, "
                     + " valorvenda = ?,"
                     + " quantidade = ?"
-                    + " WHERE identificador = ?";
+                    + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -84,7 +84,7 @@ public class PProduto {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM produto "
-                + " WHERE identificador = ?";
+                + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -101,8 +101,8 @@ public class PProduto {
 
     public Produto consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, descricao, custo, valorvenda, quantidade"
-                + " FROM produto WHERE identificador = ?";
+        String sql = "SELECT id, nome, descricao, custo, valorvenda, quantidade"
+                + " FROM produto WHERE id = ?";
 
 
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class PProduto {
         Produto retorno = new Produto();
 
         if (rs.next()) {
-            retorno.setIdentificador(rs.getInt("identificador"));
+            retorno.setIdentificador(rs.getInt("id"));
             retorno.setNome(rs.getString("nome"));
             retorno.setDescricao(rs.getString("descricao"));
             retorno.setCusto(rs.getDouble("custo"));
@@ -135,7 +135,7 @@ public class PProduto {
         while (rs.next()) {
             Produto produto = new Produto();
 
-            produto.setIdentificador(rs.getInt("identificador"));
+            produto.setIdentificador(rs.getInt("id"));
             produto.setNome(rs.getString("nome"));
             produto.setDescricao(rs.getString("descricao"));
             produto.setCusto(rs.getDouble("custo"));
