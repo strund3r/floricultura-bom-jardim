@@ -274,6 +274,19 @@ public class TelaEditaProduto extends javax.swing.JInternalFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
+        try {
+            TelaProduto telaProduto = new TelaProduto(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaProduto);
+            telaProduto.setLocation(15, 15);
+            telaProduto.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed

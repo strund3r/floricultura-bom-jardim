@@ -53,6 +53,13 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
     }
 
     private void limpar() {
+        
+        jTextFieldCPFCNPJ.setText("");
+        jTextFieldCodigo.setText("");
+        jTextFieldEmail.setText("");
+        jTextFieldEndereco.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldTelefone.setText("");
     }
 
     /**
@@ -181,6 +188,11 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +285,11 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
              e.printStackTrace();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;

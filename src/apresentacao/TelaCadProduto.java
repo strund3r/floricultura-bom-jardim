@@ -242,6 +242,18 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
+        try {
+            TelaProduto telaProduto = new TelaProduto(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaProduto);
+            telaProduto.setLocation(15, 15);
+            telaProduto.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
+        
     }//GEN-LAST:event_btnVoltarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
