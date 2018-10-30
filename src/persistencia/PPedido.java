@@ -29,7 +29,7 @@ public class PPedido {
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
                 + " pedido (id_cliente, id_produto, valor) "
-                + " VALUES (?,?, ?)";
+                + " VALUES (?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -38,12 +38,10 @@ public class PPedido {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //Trocando os valores da ? por valores recebidos no método
-//        prd.setInt(1, parametro.getID());
         prd.setInt(1, parametro.getId_cliente());
         prd.setInt(2, parametro.getId_produto());
         prd.setDouble(3, parametro.getValor());
-//        prd.setInt(4, parametro.getQuantidade());
-//
+        
         prd.execute();
         cnn.close();
     }
@@ -55,7 +53,7 @@ public class PPedido {
             String sql = "UPDATE pedido SET"
                     + " id_cliente = ?,"
                     + " id_produto = ?, "
-                    + " valor = ?, "
+                    + " valor = ? "
                     + " WHERE id = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -99,9 +97,8 @@ public class PPedido {
     public Pedido consultar(int parametro) throws SQLException {
 
         String sql = "SELECT id, id_cliente"
-                + " FROM pedido WHERE id = ?;";
+                + " FROM pedido WHERE id = ?";
 
-//        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -133,7 +130,10 @@ public class PPedido {
             pedido.setId_cliente(rs.getInt("id_cliente"));
             pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
+<<<<<<< Updated upstream
 //            pedido.setQuantidade(rs.getInt("quantidade"));
+=======
+>>>>>>> Stashed changes
 
             retorno.add(pedido);
         }
