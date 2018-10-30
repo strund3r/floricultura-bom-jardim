@@ -6,12 +6,10 @@
 package apresentacao;
 
 import entidade.ClientePF;
-import entidade.TipoCliente;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NClientePF;
-import persistencia.PTipoCliente;
 
 /**
  *
@@ -42,7 +40,7 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
             NClientePF negocio = new NClientePF();
             ClientePF clientePF = negocio.consultar(Integer.parseInt(codigo));
 
-            jTextFieldCodigo.setText(clientePF.getID()+ "");
+            jTextFieldCodigo.setText(clientePF.getIdentificador()+ "");
             jTextFieldNome.setText(clientePF.getNome());
             jTextFieldCPFCNPJ.setText(clientePF.getCpf()+ "");
             jTextFieldTelefone.setText(clientePF.getTelefone()+ "");
@@ -90,8 +88,6 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("NOME:.......");
-
-        jTextFieldCPFCNPJ.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("CPF/CNPJ:.");
@@ -256,17 +252,14 @@ public class TelaEditaCliente extends javax.swing.JInternalFrame {
             ClientePF clientePF = new ClientePF();
 
             if (!jTextFieldCodigo.getText().isEmpty()) {
-                clientePF.setID(Integer.parseInt(jTextFieldCodigo.getText()));
+                clientePF.setIdentificador(Integer.parseInt(jTextFieldCodigo.getText()));
             }
-
-            PTipoCliente ptc = new PTipoCliente();
-            TipoCliente tc = new TipoCliente();
 
             clientePF.setNome(jTextFieldNome.getText());
             clientePF.setTelefone(jTextFieldTelefone.getText());
             clientePF.setEndereco(jTextFieldEndereco.getText());
             clientePF.setEmail(jTextFieldEmail.getText());
-            clientePF.setTipoCliente(tc);
+            clientePF.setCpf(jTextFieldCPFCNPJ.getText());
 
             NClientePF negocio = new NClientePF();
 

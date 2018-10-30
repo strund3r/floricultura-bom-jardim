@@ -14,7 +14,8 @@ public class PFinanceiro {
     public void incluir(Financeiro parametro) throws SQLException {
 
         //Cria a intrução sql para a inserção de registros 
-        String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, "
+                + "nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -85,7 +86,9 @@ public class PFinanceiro {
 
     public Financeiro consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT datavencimentotitulo, descricaotitulo, identificador, nomecliente, statustitulo, valortitulo FROM titulo WHERE identificador = ?";
+        String sql = "SELECT datavencimentotitulo, descricaotitulo,"
+                + " identificador, nomecliente, statustitulo,"
+                + " valortitulo FROM titulo WHERE identificador = ?";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);

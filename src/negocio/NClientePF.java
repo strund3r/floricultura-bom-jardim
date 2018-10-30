@@ -33,10 +33,11 @@ public class NClientePF {
         if (parametro.getTelefone().isEmpty()) {
             throw new Exception("Ë necessário informar um telefone!");
         }
-        if (parametro.getTipoCliente() == null) {
-            throw new Exception("Ë necessário informar o tipo do cliente(PF ou PJ)!");
+        if (parametro.getCpf().isEmpty()){
+            throw new Exception ("É necessário informar o cpf!");
         }
-        if (parametro.getID()== 0) {
+        
+        if (parametro.getIdentificador()== 0) {
             persistencia.incluir(parametro);
         } else {
             persistencia.alterar(parametro);

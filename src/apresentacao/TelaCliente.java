@@ -53,7 +53,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             for (ClientePF clientePF : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(clientePF.getID()+ "");
+                conteudo.add(clientePF.getIdentificador()+ "");
                 conteudo.add(clientePF.getNome() + "");
                 conteudo.add(clientePF.getCpf()+ "");
                 conteudo.add(clientePF.getTelefone() + "");
