@@ -485,10 +485,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             int codCliente = Integer.parseInt(cliente);
             jTextFieldNomeCliente.setText(negocio.consultar(codCliente).getNome());
             jTextFieldCodigoCliente.setText(Integer.toString(codCliente));
-
-            
-            jTextFieldCodigoCliente.setText(tblCliente.getValueAt(1,1).toString());
-            jTextFieldNomeCliente.setText(tblCliente.getValueAt(1,1).toString());
+           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
