@@ -479,7 +479,6 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         limpar();
         try {
-<<<<<<< Updated upstream
             NClientePF negocio = new NClientePF();
 
             String cliente = tblCliente.getValueAt(tblCliente.getSelectedRow(), 0).toString();
@@ -487,11 +486,9 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             jTextFieldNomeCliente.setText(negocio.consultar(codCliente).getNome());
             jTextFieldCodigoCliente.setText(Integer.toString(codCliente));
 
-=======
             
             jTextFieldCodigoCliente.setText(tblCliente.getValueAt(1,1).toString());
             jTextFieldNomeCliente.setText(tblCliente.getValueAt(1,1).toString());
->>>>>>> Stashed changes
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

@@ -130,12 +130,7 @@ public class PPedido {
             pedido.setId_cliente(rs.getInt("id_cliente"));
             pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
-<<<<<<< Updated upstream
-//            pedido.setQuantidade(rs.getInt("quantidade"));
-=======
->>>>>>> Stashed changes
 
-            retorno.add(pedido);
         }
         return retorno;
     }
