@@ -11,7 +11,7 @@ import java.util.List;
 import persistencia.PPedido;
 
 /**
- *
+ *g
  * @author luisf
  */
 public class NPedido {
