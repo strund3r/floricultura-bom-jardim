@@ -54,7 +54,7 @@ public class PPedido {
                     + " id_cliente = ?,"
                     + " id_produto = ?, "
                     + " valor = ? "
-                    + " WHERE id = ?";
+                    + " WHERE identificador = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
             Connection cnn = util.Conexao.getConexao();
@@ -79,7 +79,7 @@ public class PPedido {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM pedido "
-                + " WHERE id = ?";
+                + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -96,8 +96,8 @@ public class PPedido {
 
     public Pedido consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT id, id_cliente"
-                + " FROM pedido WHERE id = ?";
+        String sql = "SELECT identificador, id_cliente"
+                + " FROM pedido WHERE identificador = ?";
 
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -108,7 +108,7 @@ public class PPedido {
         Pedido retorno = new Pedido();
 
         if (rs.next()) {
-            retorno.setID(rs.getInt("id"));
+            retorno.setID(rs.getInt("identificador"));
             retorno.setId_cliente(rs.getInt("id_cliente"));
             retorno.setValor(rs.getDouble("valor"));
         }
@@ -126,11 +126,12 @@ public class PPedido {
         while (rs.next()) {
             Pedido pedido = new Pedido();
 
-            pedido.setID(rs.getInt("id"));
+            pedido.setID(rs.getInt("identificador"));
             pedido.setId_cliente(rs.getInt("id_cliente"));
             pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
-
+            
+            retorno.add(pedido);
         }
         return retorno;
     }

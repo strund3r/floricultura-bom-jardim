@@ -97,6 +97,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         };
         btnVoltar = new javax.swing.JButton();
 
+        setTitle("Fornecedores");
         setPreferredSize(new java.awt.Dimension(700, 401));
 
         btnNovo.setText("Novo");
