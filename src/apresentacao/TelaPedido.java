@@ -63,24 +63,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
                 conteudo.add(negocioProduto.consultar(pedido.getId_produto()).getNome() + "");
                 conteudo.add(nf.format(pedido.getValor()) + "");
                 linhas.add(conteudo);
-                System.out.println("yyyyy");
             }
-
-//            NClientePF negocio = new NClientePF();
-//
-//            for (ClientePF clientePF : negocio.listar()) {
-//                Vector<String> conteudo = new Vector();
-//
-//                conteudo.add(clientePF.getIdentificador() + "");
-//                conteudo.add(clientePF.getNome() + "");
-//                conteudo.add(clientePF.getCpf() + "");
-//                conteudo.add(clientePF.getTelefone() + "");
-//                conteudo.add(clientePF.getEndereco() + "");
-//                conteudo.add(clientePF.getEmail() + "");
-//                linhas.add(conteudo);
-//                System.out.println("xxxx");
-//            }
-            
             tblPedido.setModel(new DefaultTableModel(linhas, cabecalho));
             tblPedido.setAutoCreateRowSorter(true);
             tblPedido.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
