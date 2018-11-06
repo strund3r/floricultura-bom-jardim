@@ -2,7 +2,6 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- * retirador de :https://www.devmedia.com.br/validando-o-cpf-em-uma-aplicacao-java/22097
  */
 package util;
 
@@ -10,7 +9,7 @@ import java.util.InputMismatchException;
 
 /**
  *
- * @author luisf
+ * @author DevMedia: https://www.devmedia.com.br/validando-o-cpf-em-uma-aplicacao-java/22097
  */
 public class ValidaCPF {
 

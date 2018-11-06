@@ -12,10 +12,12 @@ import java.util.List;
 
 public class PFornecedor {
     
+    Connection cnn = util.Conexao.getConexao();
+    
     public void incluir(Fornecedor parametro) throws SQLException {
 
         //Cria a intrução sql para a inserção de registros 
-        String sql = "INSERT INTO fornecedor (nome, endereco, telefone, cnpj) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO fornecedor (nome, endereco, telefone, cnpj, email) VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
         Connection cnn = util.Conexao.getConexao();
@@ -27,8 +29,9 @@ public class PFornecedor {
         
         prd.setString(1, parametro.getNome());
         prd.setString(2, parametro.getEndereco());
-        prd.setInt(3, parametro.getTelefone());
-        prd.setLong(4, parametro.getCnpj());
+        prd.setString(3, parametro.getTelefone());
+        prd.setString(4, parametro.getCnpj());
+        prd.setString(5, parametro.getEmail());
         
         prd.execute();
         cnn.close();
@@ -43,6 +46,7 @@ public class PFornecedor {
                 + " endereco = ?,"
                 + " telefone = ?,"
                 + " cnpj = ?"                
+                + " email = ?"                
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
@@ -55,9 +59,9 @@ public class PFornecedor {
         
         prd.setString(1, parametro.getNome());
         prd.setString(2, parametro.getEndereco());
-        prd.setInt(3, parametro.getTelefone());
-        prd.setLong(4, parametro.getCnpj());
-        prd.setInt(5, parametro.getIdentificador());
+        prd.setString(3, parametro.getTelefone());
+        prd.setString(4, parametro.getCnpj());
+        prd.setString(5, parametro.getEmail());;
 
         prd.execute();
         cnn.close();
@@ -83,9 +87,10 @@ public class PFornecedor {
 
     public Fornecedor consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, nome, endereco, telefone, cnpj FROM fornecedor WHERE identificador = ?";
+        String sql = "SELECT identificador, nome, endereco, telefone, cnpj, email"
+                + "FROM fornecedor WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getConexao();
+//        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -99,8 +104,9 @@ public class PFornecedor {
             retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
             retorno.setEndereco(rs.getString("endereco"));
-            retorno.setTelefone(rs.getInt("telefone"));
-            retorno.setCnpj(rs.getLong("cnpj"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setCnpj(rs.getString("cnpj"));
+            retorno.setCnpj(rs.getString("email"));
 
         }
 
@@ -121,8 +127,9 @@ public class PFornecedor {
             fornecedor.setIdentificador(rs.getInt("identificador"));
             fornecedor.setNome(rs.getString("nome"));
             fornecedor.setEndereco(rs.getString("endereco"));
-            fornecedor.setTelefone(rs.getInt("telefone"));
-            fornecedor.setCnpj(rs.getLong("cnpj"));
+            fornecedor.setTelefone(rs.getString("telefone"));
+            fornecedor.setCnpj(rs.getString("cnpj"));
+            fornecedor.setCnpj(rs.getString("email"));
             
             retorno.add(fornecedor);
         }
