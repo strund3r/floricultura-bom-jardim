@@ -6,6 +6,7 @@
 package apresentacao;
 
 import entidade.ClientePF;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NClientePF;
@@ -30,6 +31,27 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
     public TelaCadCliente(JDesktopPane jDesktopPrincipal) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
+    }
+
+    TelaCadCliente(JDesktopPane jDesktopPrincipal, String codigo) {
+                this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+        //preencher a tela
+        try {
+
+            NClientePF negocio = new NClientePF();
+            ClientePF clientePF = negocio.consultar(Integer.parseInt(codigo));
+
+            jTextFieldCodigo.setText(clientePF.getIdentificador()+ "");
+            jTextFieldNome.setText(clientePF.getNome());
+            jTextFieldCPFCNPJ.setText(clientePF.getCpf()+ "");
+            jTextFieldTelefone.setText(clientePF.getTelefone()+ "");
+            jTextFieldEndereco.setText(clientePF.getEndereco()+ "");
+            jTextFieldEmail.setText(clientePF.getEmail()+ "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     private void limpar() {

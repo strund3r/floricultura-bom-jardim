@@ -96,7 +96,7 @@ public class PPedido {
 
     public Pedido consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, id_cliente"
+        String sql = "SELECT identificador, id_cliente, id_produto, valor"
                 + " FROM pedido WHERE identificador = ?";
 
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -110,6 +110,7 @@ public class PPedido {
         if (rs.next()) {
             retorno.setID(rs.getInt("identificador"));
             retorno.setId_cliente(rs.getInt("id_cliente"));
+            retorno.setId_produto(rs.getInt("id_produto"));
             retorno.setValor(rs.getDouble("valor"));
         }
         return retorno;

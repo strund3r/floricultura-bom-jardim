@@ -30,11 +30,11 @@ public class TelaCadFornecedor extends javax.swing.JInternalFrame {
             Fornecedor fornecedor = negocio.consultar(Integer.parseInt(codigo));
 
             jTextFieldCodigo.setText(fornecedor.getIdentificador()+ "");
-            jTextFieldFornecedor.setText(fornecedor.getNome());
+            jTextFieldFornecedor.setText(fornecedor.getNome()+"");
             jFormattedTextFieldCnpj.setText(fornecedor.getCnpj() + "");
             jFormattedTextFieldTelefone.setText(fornecedor.getTelefone() + "");
-            jTextFieldEndereco.setText(fornecedor.getEndereco());
-            jTextFieldEmail.setText(fornecedor.getEmail());
+            jTextFieldEndereco.setText(fornecedor.getEndereco()+"");
+            jTextFieldEmail.setText(fornecedor.getEmail()+"");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

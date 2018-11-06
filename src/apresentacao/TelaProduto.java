@@ -203,11 +203,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             int linha = tblProduto.getSelectedRow();
             String codigo = tblProduto.getValueAt(linha, 0).toString();
 
-            TelaEditaProduto telaEditaProduto = new TelaEditaProduto(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaProduto);
-            telaEditaProduto.setLocation(20, 15);
-            telaEditaProduto.setVisible(true);
+            TelaCadProduto telaCadProduto = new TelaCadProduto(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadProduto);
+            telaCadProduto.setLocation(20, 15);
+            telaCadProduto.setVisible(true);
             this.dispose();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

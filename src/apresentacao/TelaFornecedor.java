@@ -43,11 +43,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
             Vector<String> cabecalho = new Vector();
 
-            cabecalho.add("Código");
-            cabecalho.add("Nome");
-            cabecalho.add("Endereço");
-            cabecalho.add("Telefone");
+            cabecalho.add("CÓDIGO");
+            cabecalho.add("NOME");
+            cabecalho.add("ENDEREÇO");
+            cabecalho.add("TELEFONE");
             cabecalho.add("CNPJ");
+            cabecalho.add("E-MAIL");
 
             NFornecedor negocio = new NFornecedor();
             Vector linhas = new Vector();
@@ -60,11 +61,11 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 conteudo.add(fornecedor.getEndereco() + "");
                 conteudo.add(fornecedor.getTelefone() + "");
                 conteudo.add(fornecedor.getCnpj() + "");
+                conteudo.add(fornecedor.getEmail()+ "");
 
                 linhas.add(conteudo);
             }
             tblFornecedor.setModel(new DefaultTableModel(linhas, cabecalho));
-
             tblFornecedor.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {

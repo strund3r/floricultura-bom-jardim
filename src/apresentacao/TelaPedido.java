@@ -5,7 +5,6 @@
  */
 package apresentacao;
 
-import entidade.ClientePF;
 import entidade.Pedido;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -189,10 +188,10 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             int linha = tblPedido.getSelectedRow();
             String codigo = tblPedido.getValueAt(linha, 0).toString();
 
-            TelaEditaPedido telaEditaPedido = new TelaEditaPedido(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaPedido);
-            telaEditaPedido.setLocation(20, 15);
-            telaEditaPedido.setVisible(true);
+            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadPedido);
+            telaCadPedido.setLocation(20, 15);
+            telaCadPedido.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             e.getMessage();

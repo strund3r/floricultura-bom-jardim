@@ -9,6 +9,7 @@ import entidade.ClientePF;
 import entidade.Pedido;
 import entidade.Produto;
 import java.awt.Component;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
@@ -46,6 +47,29 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         this.jDesktopPrincipal = jDesktopPrincipal;
         carregarTabelaCliente();
         carregarTabelaProduto();
+    }
+
+    TelaCadPedido(JDesktopPane jDesktopPrincipal, String codigo) {
+        this();
+        this.jDesktopPrincipal = jDesktopPrincipal;
+        try {
+
+            NPedido negocioPedido = new NPedido();
+            NClientePF negocioClientePF = new NClientePF();
+            NProduto negocioProduto = new NProduto();
+            Pedido pedido = negocioPedido.consultar(Integer.parseInt(codigo));
+            ClientePF clientepf = negocioClientePF.consultar(pedido.getId_cliente());
+            Produto produto = negocioProduto.consultar(pedido.getId_produto());
+
+            jTextFieldCodigoPedido.setText(pedido.getID()+ "");
+            jTextFieldCodigoCliente.setText(clientepf.getNome()+"");
+            jTextFieldNomeCliente.setText(clientepf.getNome()+"");
+            jTextFieldCodigoProduto.setText(produto.getIdentificador()+ "");
+            jTextFieldProduto.setText(produto.getNome()+"");
+            jTextFieldValor.setText(pedido.getValor()+"");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     private void limpar() {

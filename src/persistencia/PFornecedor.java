@@ -88,9 +88,8 @@ public class PFornecedor {
     public Fornecedor consultar(int parametro) throws SQLException {
 
         String sql = "SELECT identificador, nome, endereco, telefone, cnpj, email"
-                + "FROM fornecedor WHERE identificador = ?";
+                + " FROM fornecedor WHERE identificador = ?";
 
-//        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -106,10 +105,8 @@ public class PFornecedor {
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setCnpj(rs.getString("cnpj"));
-            retorno.setCnpj(rs.getString("email"));
-
+            retorno.setEmail(rs.getString("email"));
         }
-
         return retorno;
     }
 
@@ -129,7 +126,7 @@ public class PFornecedor {
             fornecedor.setEndereco(rs.getString("endereco"));
             fornecedor.setTelefone(rs.getString("telefone"));
             fornecedor.setCnpj(rs.getString("cnpj"));
-            fornecedor.setCnpj(rs.getString("email"));
+            fornecedor.setEmail(rs.getString("email"));
             
             retorno.add(fornecedor);
         }
