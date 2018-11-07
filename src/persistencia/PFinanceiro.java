@@ -18,19 +18,17 @@ public class PFinanceiro {
                 + "nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getInstance().getConexao();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //trocando os valores da ? por valores recebidos no método
-        
         prd.setDate(1, parametro.getDataVencimentoTitulo());
         prd.setString(2, parametro.getDescricaoTitulo());
         prd.setString(3, parametro.getNomeCliente());
         prd.setInt(4, parametro.getStatusTitulo());
         prd.setDouble(5, parametro.getValorTitulo());
-        
 
         prd.execute();
         cnn.close();
@@ -49,7 +47,8 @@ public class PFinanceiro {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+//        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getInstance().getConexao();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -72,7 +71,8 @@ public class PFinanceiro {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+//        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getInstance().getConexao();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -90,7 +90,8 @@ public class PFinanceiro {
                 + " identificador, nomecliente, statustitulo,"
                 + " valortitulo FROM titulo WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getConexao();
+//        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getInstance().getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -116,7 +117,8 @@ public class PFinanceiro {
     public List<Financeiro> listar() throws SQLException {
 
         String sql = "SELECT * FROM titulo";
-        Connection cnn = util.Conexao.getConexao();
+//        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getInstance().getConexao();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Financeiro> retorno = new ArrayList<>();
