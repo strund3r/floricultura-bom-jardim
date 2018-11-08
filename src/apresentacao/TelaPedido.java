@@ -39,38 +39,37 @@ public class TelaPedido extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
-         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         try {
 
             Vector<String> cabecalho = new Vector();
             cabecalho.add("Código");
             cabecalho.add("Cliente");
-//            cabecalho.add("Quantidade");
             cabecalho.add("Produto");
             cabecalho.add("Valor");
 
             NPedido negocioPedido = new NPedido();
             Vector linhas = new Vector();
+
             NProduto negocioProduto = new NProduto();
             NClientePF negocioCliente = new NClientePF();
             
-
             for (Pedido pedido : negocioPedido.listar()) {
                 Vector<String> conteudo = new Vector();
 
                 conteudo.add(pedido.getID() + "");
                 conteudo.add(negocioCliente.consultar(pedido.getId_cliente()).getNome() + "");
-//                conteudo.add(pedido.getQuantidade() + "");
                 conteudo.add(negocioProduto.consultar(pedido.getId_produto()).getNome() + "");
                 conteudo.add(nf.format(pedido.getValor()) + "");
                 linhas.add(conteudo);
             }
             tblPedido.setModel(new DefaultTableModel(linhas, cabecalho));
-
+            tblPedido.setAutoCreateRowSorter(true);
             tblPedido.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -189,13 +188,13 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             int linha = tblPedido.getSelectedRow();
             String codigo = tblPedido.getValueAt(linha, 0).toString();
 
-            TelaEditaPedido telaEditaPedido = new TelaEditaPedido(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaPedido);
-            telaEditaPedido.setLocation(20, 15);
-            telaEditaPedido.setVisible(true);
+            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadPedido);
+            telaCadPedido.setLocation(20, 15);
+            telaCadPedido.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

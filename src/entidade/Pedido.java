@@ -7,13 +7,13 @@ package entidade;
  */
 public class Pedido {
 
-    private int id;
+    private int identificador;
     private int id_cliente;
     private int id_produto;
     private double valor;
 
-    public Pedido(int id, int id_cliente, int id_produto) {
-        this.id = id;
+    public Pedido(int identificador, int id_cliente, int id_produto) {
+        this.identificador = identificador;
         this.id_cliente = id_cliente;
         this.id_produto = id_produto;
     }
@@ -39,11 +39,11 @@ public class Pedido {
     }
 
     public int getID() {
-        return id;
+        return identificador;
     }
 
-    public void setID(int id) {
-        this.id = id;
+    public void setID(int identificador) {
+        this.identificador = identificador;
     }
 
     public double getValor() {

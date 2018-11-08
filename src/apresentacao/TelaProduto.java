@@ -7,6 +7,8 @@ package apresentacao;
 
 import entidade.Produto;
 import java.awt.Component;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -26,6 +28,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
      * Creates new form TelaCliente
      */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
+    NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
     public TelaProduto() {
         initComponents();
@@ -57,7 +60,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
 
                 conteudo.add(produto.getIdentificador() + "");
                 conteudo.add(produto.getNome() + "");
-                conteudo.add(produto.getValorVenda() + "");
+                conteudo.add(nf.format(produto.getValorVenda()) + "");
                 conteudo.add(produto.getQuantidade() + "");
                 conteudo.add(produto.getDescricao() + "");
                 linhas.add(conteudo);
@@ -200,11 +203,12 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             int linha = tblProduto.getSelectedRow();
             String codigo = tblProduto.getValueAt(linha, 0).toString();
 
-            TelaEditaProduto telaEditaProduto = new TelaEditaProduto(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaProduto);
-            telaEditaProduto.setLocation(20, 15);
-            telaEditaProduto.setVisible(true);
+            TelaCadProduto telaCadProduto = new TelaCadProduto(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadProduto);
+            telaCadProduto.setLocation(20, 15);
+            telaCadProduto.setVisible(true);
             this.dispose();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

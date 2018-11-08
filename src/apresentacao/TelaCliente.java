@@ -203,10 +203,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             int linha = tblCliente.getSelectedRow();
             String codigo = tblCliente.getValueAt(linha, 0).toString();
 
-            TelaEditaCliente telaEditaCliente = new TelaEditaCliente(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaCliente);
-            telaEditaCliente.setLocation(20, 15);
-            telaEditaCliente.setVisible(true);
+            TelaCadCliente telaCadCliente = new TelaCadCliente(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadCliente);
+            telaCadCliente.setLocation(20, 15);
+            telaCadCliente.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

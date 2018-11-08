@@ -7,6 +7,8 @@ package apresentacao;
 
 import entidade.Financeiro;
 import java.awt.Component;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -26,6 +28,8 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
      * Creates new form TelaTitulo
      */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
+    NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    
     public TelaTitulo() {
         initComponents();
         carregarTabela();
@@ -54,7 +58,7 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
 
                 conteudo.add(titulo.getIdentificador()+ "");
                 conteudo.add(titulo.getDescricaoTitulo() + "");
-                conteudo.add(titulo.getValorTitulo()+ "");
+                conteudo.add(nf.format(titulo.getValorTitulo())+ "");
                 conteudo.add(titulo.getDataVencimentoTitulo() + "");
                 conteudo.add(titulo.getStatusTitulo() + "");
                 
@@ -94,6 +98,7 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
 
+        setTitle("Títulos");
         setPreferredSize(new java.awt.Dimension(700, 401));
 
         btnEditar.setText("Editar");

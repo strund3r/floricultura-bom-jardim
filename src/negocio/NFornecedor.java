@@ -6,7 +6,7 @@ import java.util.List;
 import persistencia.PFornecedor;
 
 public class NFornecedor {
-    
+
     PFornecedor persistencia;
 
     public NFornecedor() {
@@ -18,14 +18,14 @@ public class NFornecedor {
         if (parametro.getNome().isEmpty()) {
             throw new Exception("É necessário informar o nome.");
         }
+        if (parametro.getCnpj().isEmpty()) {
+            throw new Exception("É necessário informar o CNPJ.");
+        }
         if (parametro.getEndereco().isEmpty()) {
             throw new Exception("É necessário informar o endereço.");
         }
-        if (parametro.getTelefone() == 0) {
+        if (parametro.getTelefone().isEmpty()) {
             throw new Exception("É necessário informar a telefone.");
-        }
-        if (parametro.getCnpj() == 0) {
-            throw new Exception("É necessário informar o CNPJ.");
         }
 
         if (parametro.getIdentificador() == 0) {
@@ -33,7 +33,6 @@ public class NFornecedor {
         } else {
             persistencia.alterar(parametro);
         }
-
     }
 
     public void excluir(int parametro) throws SQLException {
@@ -47,5 +46,5 @@ public class NFornecedor {
     public List<Fornecedor> listar() throws SQLException {
         return persistencia.listar();
     }
-    
+
 }
