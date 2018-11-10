@@ -17,8 +17,7 @@ public class PFornecedor {
         String sql = "INSERT INTO fornecedor (nome, endereco, telefone, cnpj, email) VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-//        Connection cnn = util.Conexao.getConexao();
-        Connection cnn = util.Conexao.getInstance().getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -47,8 +46,7 @@ public class PFornecedor {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-//        Connection cnn = util.Conexao.getConexao();
-        Connection cnn = util.Conexao.getInstance().getConexao();
+        Connection cnn = util.Conexao.getConnection();
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -69,8 +67,7 @@ public class PFornecedor {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-//        Connection cnn = util.Conexao.getConexao();
-        Connection cnn = util.Conexao.getInstance().getConexao();
+        Connection cnn = util.Conexao.getConnection();
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -86,7 +83,7 @@ public class PFornecedor {
         String sql = "SELECT identificador, nome, endereco, telefone, cnpj, email"
                 + " FROM fornecedor WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getInstance().getConexao();
+        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -110,8 +107,7 @@ public class PFornecedor {
     public List<Fornecedor> listar() throws SQLException {
 
         String sql = "SELECT * FROM fornecedor";
-//        Connection cnn = util.Conexao.getConexao();
-        Connection cnn = util.Conexao.getInstance().getConexao();
+        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Fornecedor> retorno = new ArrayList<>();
