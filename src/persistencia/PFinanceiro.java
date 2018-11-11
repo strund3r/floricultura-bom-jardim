@@ -11,14 +11,13 @@ import java.util.List;
 
 public class PFinanceiro {
 
+    Connection cnn = util.Conexao.getConexao();
+    
     public void incluir(Financeiro parametro) throws SQLException {
 
         //Cria a intrução sql para a inserção de registros 
         String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, "
                 + "nomecliente, statustitulo, valortitulo, identificadorcliente) VALUES (?,?,?,?,?,?)";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -48,9 +47,6 @@ public class PFinanceiro {
                 + "identificadorcliente = ?"
                 + " WHERE identificador = ?";
 
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConnection();
-
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -72,9 +68,6 @@ public class PFinanceiro {
         String sql = "DELETE FROM titulo "
                 + " WHERE identificador = ?";
 
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConnection();
-
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -91,7 +84,6 @@ public class PFinanceiro {
                 + " identificador, nomecliente, statustitulo,"
                 + " valortitulo, identificadorcliente FROM titulo WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -118,7 +110,6 @@ public class PFinanceiro {
     public List<Financeiro> listar() throws SQLException {
 
         String sql = "SELECT * FROM titulo";
-        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Financeiro> retorno = new ArrayList<>();

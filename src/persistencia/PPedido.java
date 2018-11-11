@@ -22,16 +22,14 @@ import java.util.logging.Logger;
  */
 public class PPedido {
 
-//    Connection cnn = util.Conexao.getConexao();
+    Connection cnn = util.Conexao.getConexao();
+    
     public void incluir(Pedido parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
                 + " pedido (id_cliente, id_produto, valor) "
                 + " VALUES (?,?,?)";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -55,9 +53,6 @@ public class PPedido {
                     + " valor = ? "
                     + " WHERE identificador = ?";
 
-            //Cria a conexao a partir dos métodos da fábrica de conexões
-            Connection cnn = util.Conexao.getConnection();
-
             //cria o procedimento para a execução "contra" o BD
             PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -80,9 +75,6 @@ public class PPedido {
         String sql = "DELETE FROM pedido "
                 + " WHERE identificador = ?";
 
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConnection();
-
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -98,7 +90,6 @@ public class PPedido {
         String sql = "SELECT identificador, id_cliente, id_produto, valor"
                 + " FROM pedido WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -119,7 +110,6 @@ public class PPedido {
     public List<Pedido> listar() throws SQLException {
 
         String sql = "SELECT * FROM pedido";
-        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Pedido> retorno = new ArrayList<>();
