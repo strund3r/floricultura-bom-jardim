@@ -43,11 +43,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
             Vector<String> cabecalho = new Vector();
 
-            cabecalho.add("Código");
-            cabecalho.add("Nome");
-            cabecalho.add("Endereço");
-            cabecalho.add("Telefone");
+            cabecalho.add("CÓDIGO");
+            cabecalho.add("NOME");
+            cabecalho.add("ENDEREÇO");
+            cabecalho.add("TELEFONE");
             cabecalho.add("CNPJ");
+            cabecalho.add("E-MAIL");
 
             NFornecedor negocio = new NFornecedor();
             Vector linhas = new Vector();
@@ -60,12 +61,12 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
                 conteudo.add(fornecedor.getEndereco() + "");
                 conteudo.add(fornecedor.getTelefone() + "");
                 conteudo.add(fornecedor.getCnpj() + "");
+                conteudo.add(fornecedor.getEmail()+ "");
 
                 linhas.add(conteudo);
             }
-            tblForncededor.setModel(new DefaultTableModel(linhas, cabecalho));
-
-            tblForncededor.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+            tblFornecedor.setModel(new DefaultTableModel(linhas, cabecalho));
+            tblFornecedor.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -85,7 +86,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblForncededor = new javax.swing.JTable(){
+        tblFornecedor = new javax.swing.JTable(){
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);
@@ -116,7 +117,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tblForncededor.setModel(new javax.swing.table.DefaultTableModel(
+        tblFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -124,7 +125,7 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblForncededor);
+        jScrollPane1.setViewportView(tblFornecedor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,14 +200,14 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         try {
-            int linha = tblForncededor.getSelectedRow();
-            String codigo = tblForncededor.getValueAt(linha, 0).toString();
+            int linha = tblFornecedor.getSelectedRow();
+            String codigo = tblFornecedor.getValueAt(linha, 0).toString();
 
-            TelaEditaFornecedor telaEditaFornecedor = new TelaEditaFornecedor(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaFornecedor);
-            telaEditaFornecedor.setLocation(20, 15);
-            telaEditaFornecedor.setVisible(true);
-            this.dispose();           
+            TelaCadFornecedor telaCadFornecedor = new TelaCadFornecedor(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadFornecedor);
+            telaCadFornecedor.setLocation(20, 15);
+            telaCadFornecedor.setVisible(true);
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -223,6 +224,6 @@ public class TelaFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblForncededor;
+    private javax.swing.JTable tblFornecedor;
     // End of variables declaration//GEN-END:variables
 }

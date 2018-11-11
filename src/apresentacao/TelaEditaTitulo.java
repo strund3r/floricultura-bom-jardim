@@ -15,9 +15,6 @@ import util.Data;
  */
 public class TelaEditaTitulo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaEditaTitulo
-     */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
 
     public TelaEditaTitulo() {
@@ -91,6 +88,8 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("CLIENTE:");
+
+        jTextFieldCliente1.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("DESCRIÇÃO:");

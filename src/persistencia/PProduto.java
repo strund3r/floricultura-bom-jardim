@@ -15,15 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author luisf
  */
 public class PProduto {
 
-    Connection cnn = util.Conexao.getConexao();
-
+//    Connection cnn = util.Conexao.getConexao();
     public void incluir(Produto parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
@@ -31,7 +29,7 @@ public class PProduto {
                 + " VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+       Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -60,7 +58,7 @@ public class PProduto {
                     + " WHERE identificador = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
-            Connection cnn = util.Conexao.getConexao();
+            Connection cnn = util.Conexao.getConnection();
 
             //cria o procedimento para a execução "contra" o BD
             PreparedStatement prd = cnn.prepareStatement(sql);
@@ -87,7 +85,7 @@ public class PProduto {
                 + " WHERE id = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -104,7 +102,7 @@ public class PProduto {
         String sql = "SELECT identificador, nome, descricao, custo, valorvenda, quantidade"
                 + " FROM produto WHERE identificador = ?";
 
-
+        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -127,7 +125,7 @@ public class PProduto {
     public List<Produto> listar() throws SQLException {
 
         String sql = "SELECT * FROM produto";
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Produto> retorno = new ArrayList<>();

@@ -1,13 +1,13 @@
 package entidade;
 
-
 public class Fornecedor {
-    
+
     private int identificador;
     private String nome;
     private String endereco;
-    private int telefone;
-    private long cnpj;
+    private String telefone;
+    private String cnpj;
+    private String email;
 
     public int getIdentificador() {
         return identificador;
@@ -33,22 +33,28 @@ public class Fornecedor {
         this.endereco = endereco;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-    
-    
-    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

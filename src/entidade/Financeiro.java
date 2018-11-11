@@ -1,16 +1,24 @@
-
 package entidade;
 
 import java.sql.Date;
 
 public class Financeiro {
 
+    private int id_cliente;
     private int identificador;
     private Date dataVencimentoTitulo;
     private String nomeCliente;
     private String descricaoTitulo;
     private double valorTitulo;
     private int statusTitulo;
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
 
     public int getIdentificador() {
         return identificador;
@@ -59,5 +67,5 @@ public class Financeiro {
     public void setValorTitulo(double valorTitulo) {
         this.valorTitulo = valorTitulo;
     }
-   
+
 }

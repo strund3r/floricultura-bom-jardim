@@ -21,8 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class PClientePF {
 
-    Connection cnn = util.Conexao.getConexao();
-
+    // como buscar a conexão aqui em cima, em vez de copiar em todos os métodos, uma vez que precsa lançar exceção SQL?????
+    //
+//    Connection cnn = util.Conexao.getInstance().getConexao();
     public void incluir(ClientePF parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
@@ -30,7 +31,7 @@ public class PClientePF {
                 + " VALUES (?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -59,8 +60,7 @@ public class PClientePF {
                     + " WHERE identificador = ?";
 
             //Cria a conexao a partir dos métodos da fábrica de conexões
-            Connection cnn = util.Conexao.getConexao();
-
+            Connection cnn = util.Conexao.getConnection();
             //cria o procedimento para a execução "contra" o BD
             PreparedStatement prd = cnn.prepareStatement(sql);
 
@@ -86,7 +86,7 @@ public class PClientePF {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class PClientePF {
         String sql = "SELECT identificador, nome, cpf, endereco, telefone, email"
                 + " FROM clientePF WHERE identificador = ?";
 
-//        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -126,7 +126,7 @@ public class PClientePF {
     public List<ClientePF> listar() throws SQLException {
 
         String sql = "SELECT * FROM clientepf";
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<ClientePF> retorno = new ArrayList<>();

@@ -15,22 +15,21 @@ public class PFinanceiro {
 
         //Cria a intrução sql para a inserção de registros 
         String sql = "INSERT INTO titulo (datavencimentotitulo, descricaotitulo, "
-                + "nomecliente, statustitulo, valortitulo) VALUES (?,?,?,?,?)";
+                + "nomecliente, statustitulo, valortitulo, identificadorcliente) VALUES (?,?,?,?,?,?)";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //trocando os valores da ? por valores recebidos no método
-        
         prd.setDate(1, parametro.getDataVencimentoTitulo());
         prd.setString(2, parametro.getDescricaoTitulo());
         prd.setString(3, parametro.getNomeCliente());
         prd.setInt(4, parametro.getStatusTitulo());
         prd.setDouble(5, parametro.getValorTitulo());
-        
+        prd.setInt(6, parametro.getId_cliente());
 
         prd.execute();
         cnn.close();
@@ -45,11 +44,12 @@ public class PFinanceiro {
                 + " descricaotitulo = ?,"
                 + " nomecliente = ?,"
                 + " statustitulo = ?,"
-                + " valortitulo = ?"
+                + " valortitulo = ?,"
+                + "identificadorcliente = ?"
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -61,6 +61,7 @@ public class PFinanceiro {
         prd.setInt(4, parametro.getStatusTitulo());
         prd.setDouble(5, parametro.getValorTitulo());
         prd.setInt(6, parametro.getIdentificador());
+        prd.setInt(7, parametro.getId_cliente());
 
         prd.execute();
         cnn.close();
@@ -72,7 +73,7 @@ public class PFinanceiro {
                 + " WHERE identificador = ?";
 
         //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -88,9 +89,9 @@ public class PFinanceiro {
 
         String sql = "SELECT datavencimentotitulo, descricaotitulo,"
                 + " identificador, nomecliente, statustitulo,"
-                + " valortitulo FROM titulo WHERE identificador = ?";
+                + " valortitulo, identificadorcliente FROM titulo WHERE identificador = ?";
 
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -107,6 +108,7 @@ public class PFinanceiro {
             retorno.setNomeCliente(rs.getString("nomecliente"));
             retorno.setStatusTitulo(rs.getInt("statustitulo"));
             retorno.setValorTitulo(rs.getDouble("valortitulo"));
+            retorno.setId_cliente(rs.getInt("identificadorcliente"));
 
         }
 
@@ -116,7 +118,7 @@ public class PFinanceiro {
     public List<Financeiro> listar() throws SQLException {
 
         String sql = "SELECT * FROM titulo";
-        Connection cnn = util.Conexao.getConexao();
+        Connection cnn = util.Conexao.getConnection();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Financeiro> retorno = new ArrayList<>();
@@ -130,6 +132,7 @@ public class PFinanceiro {
             titulo.setNomeCliente(rs.getString("nomecliente"));
             titulo.setStatusTitulo(rs.getInt("statustitulo"));
             titulo.setValorTitulo(rs.getDouble("valortitulo"));
+            titulo.setId_cliente(rs.getInt("identificadorcliente"));
 
             retorno.add(titulo);
         }
