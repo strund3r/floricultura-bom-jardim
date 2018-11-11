@@ -69,7 +69,6 @@ public class TelaPedido extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -178,7 +177,6 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             telaCadPedido.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed
@@ -194,7 +192,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             telaCadPedido.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            e.getMessage();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

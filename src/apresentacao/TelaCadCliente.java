@@ -34,7 +34,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
     }
 
     TelaCadCliente(JDesktopPane jDesktopPrincipal, String codigo) {
-                this();
+        this();
         this.jDesktopPrincipal = jDesktopPrincipal;
         //preencher a tela
         try {
