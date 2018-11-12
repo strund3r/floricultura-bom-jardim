@@ -304,7 +304,9 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         dispose();
         try {
             
-            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
+            boolean botaoSelecionar = true;
+            
+            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal, botaoSelecionar, 2);
             jDesktopPrincipal.add(telaCliente);
             telaCliente.setLocation(15, 15);
             telaCliente.setVisible(true);

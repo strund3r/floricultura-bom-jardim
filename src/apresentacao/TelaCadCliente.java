@@ -54,7 +54,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         }
     }
 
-    private void limpar() {
+        private void limpar() {
 
         jTextFieldNome.setText("");
         jTextFieldTelefone.setText("");
@@ -244,7 +244,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
         try {
-            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
+            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal, true, 1);
             jDesktopPrincipal.add(telaCliente);
             telaCliente.setLocation(15, 15);
             telaCliente.setVisible(true);

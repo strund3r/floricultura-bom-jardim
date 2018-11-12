@@ -1,6 +1,4 @@
-
 package apresentacao;
-
 
 import entidade.Financeiro;
 import java.sql.SQLException;
@@ -35,11 +33,11 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             NFinanceiro negocio = new NFinanceiro();
             Financeiro titulo = negocio.consultar(Integer.parseInt(codigo));
 
-            jTextFieldCodigo1.setText(titulo.getIdentificador()+ "");
-            jTextFieldCliente1.setText(titulo.getNomeCliente()+ "");
-            jTextFieldDescricao1.setText(titulo.getDescricaoTitulo());
+            jTextFieldCodigo1.setText(titulo.getIdentificador() + "");
+            jTextFieldCliente1.setText(titulo.getNomeCliente() + "");
+            jTextFieldDescricao1.setText(titulo.getDescricaoTitulo()); 
             jFormattedValor1.setText(titulo.getValorTitulo() + "");
-            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo())+ "");
+            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo()) + "");
             jComboBoxStatus1.setSelectedIndex(titulo.getStatusTitulo());
 
         } catch (SQLException ex) {
@@ -48,14 +46,14 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
     }
 
     private void limpar() {
-        
+
         jFormattedValor1.setText("");
         jFormattedVencimento1.setText("");
         jTextFieldCliente1.setText("");
         jTextFieldCodigo1.setText("");
         jTextFieldDescricao1.setText("");
         jComboBoxStatus1.setSelectedItem(0);
-        
+
     }
 
     /**
@@ -113,7 +111,7 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         });
 
         try {
-            jFormattedValor1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####.##")));
+            jFormattedValor1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####.#")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -296,7 +294,6 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
 
             limpar();
-
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

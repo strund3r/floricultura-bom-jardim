@@ -200,7 +200,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         try {
-            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
+            boolean botaoSelecionar = false;
+            
+            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal, botaoSelecionar, 1);
             jDesktopPrincipal.add(telaCliente);
             telaCliente.setLocation(15, 15);
             telaCliente.setVisible(true);

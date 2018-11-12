@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apresentacao;
 
 import entidade.Financeiro;
@@ -25,12 +20,9 @@ import util.Data;
  */
 public class TelaTitulo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaTitulo
-     */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
     NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-    
+
     public TelaTitulo() {
         initComponents();
         carregarTabela();
@@ -40,9 +32,21 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
     }
-    
+
+    public String retornaStatus(int status) {
+        String retorno = "indefinido";
+        if (status == 1) {
+            retorno = "À pagar";
+        } else if (status == 2) {
+            retorno = "Pago";
+        } else {
+            retorno = "À receber";
+        }
+        return retorno;
+    }
+
     private void carregarTabela() {
-        
+
         try {
 
             Vector<String> cabecalho = new Vector();
@@ -52,23 +56,23 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
             cabecalho.add("Valor");
             cabecalho.add("Vencimento");
             cabecalho.add("Status");
-            
+
             NFinanceiro negocio = new NFinanceiro();
             Vector linhas = new Vector();
 
             for (Financeiro titulo : negocio.listar()) {
-                
+
                 Data formatar = new Data();
-                
+
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(titulo.getIdentificador()+ "");
-                conteudo.add(titulo.getNomeCliente()+ "");
+                conteudo.add(titulo.getIdentificador() + "");
+                conteudo.add(titulo.getNomeCliente() + "");
                 conteudo.add(titulo.getDescricaoTitulo() + "");
-                conteudo.add(nf.format(titulo.getValorTitulo())+ "");
+                conteudo.add(titulo.getValorTitulo() + "");
                 conteudo.add(Data.formatarData(titulo.getDataVencimentoTitulo()) + "");
-                conteudo.add(titulo.getStatusTitulo() + "");
-                
+                conteudo.add(retornaStatus(titulo.getStatusTitulo()) + "");
+
                 linhas.add(conteudo);
             }
             tblTitulo.setModel(new DefaultTableModel(linhas, cabecalho));
@@ -79,7 +83,7 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,7 +198,8 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
             jDesktopPrincipal.add(telaEditaTitulo);
             telaEditaTitulo.setLocation(20, 15);
             telaEditaTitulo.setVisible(true);
-            this.dispose();           
+            this.dispose();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -206,13 +211,13 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         try {
-            
+
             TelaCadTitulo telaCadTitulo = new TelaCadTitulo(jDesktopPrincipal);
             jDesktopPrincipal.add(telaCadTitulo);
             telaCadTitulo.setLocation(20, 15);
             telaCadTitulo.setVisible(true);
             this.dispose();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -229,5 +234,4 @@ public class TelaTitulo extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblTitulo;
     // End of variables declaration//GEN-END:variables
 
-    
 }

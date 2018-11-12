@@ -56,8 +56,8 @@ public class PFinanceiro {
         prd.setString(3, parametro.getNomeCliente());
         prd.setInt(4, parametro.getStatusTitulo());
         prd.setDouble(5, parametro.getValorTitulo());
-        prd.setInt(6, parametro.getIdentificador());
-        prd.setInt(7, parametro.getId_cliente());
+        prd.setInt(6, parametro.getId_cliente());
+        prd.setInt(7, parametro.getIdentificador());
 
         prd.execute();
         cnn.close();

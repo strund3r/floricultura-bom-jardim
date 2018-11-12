@@ -25,6 +25,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCliente
      */
+    int opVoltar = 0;
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
 
     public TelaCliente() {
@@ -32,9 +33,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         carregarTabela();
     }
 
-    TelaCliente(JDesktopPane jDesktopPrincipal) {
+    TelaCliente(JDesktopPane jDesktopPrincipal, boolean botaoSelecionar, int op) {
         this();
+        jButtonSelecionarCliente.setEnabled(botaoSelecionar);
         this.jDesktopPrincipal = jDesktopPrincipal;
+        opVoltar = op;
     }
 
     private void carregarTabela() {
@@ -194,7 +197,19 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        dispose();
+        try {
+            if (opVoltar == 1) {
+                dispose();
+            } else {
+                TelaCadTitulo telaCadTitulo = new TelaCadTitulo(jDesktopPrincipal);
+                jDesktopPrincipal.add(telaCadTitulo);
+                telaCadTitulo.setLocation(20, 15);
+                telaCadTitulo.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -229,18 +244,18 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         try {
             int linha = tblCliente.getSelectedRow();
             String codigo = tblCliente.getValueAt(linha, 0).toString();
-            
+
             TelaCadTitulo telaCadTitulo = new TelaCadTitulo(jDesktopPrincipal, codigo);
             jDesktopPrincipal.add(telaCadTitulo);
             telaCadTitulo.setLocation(20, 15);
             telaCadTitulo.setVisible(true);
             this.dispose();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonSelecionarClienteActionPerformed
 
 
