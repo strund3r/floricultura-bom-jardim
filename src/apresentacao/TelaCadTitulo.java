@@ -69,7 +69,7 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         btnVoltar1 = new javax.swing.JButton();
         btnLimpar1 = new javax.swing.JButton();
 
-        setTitle("Cadastro de Títulos");
+        setTitle("Cadastrar Títulos");
 
         btnSalvar1.setText("Salvar");
         btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
