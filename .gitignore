@@ -5,7 +5,6 @@
 *.log
 
 # DB connection file
-src/util/Conexao.java
 
 # Private files
 nbproject/private/*
