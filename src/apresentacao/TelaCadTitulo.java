@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import negocio.NClientePF;
 import negocio.NFinanceiro;
 import util.Data;
+import util.FormataApenasLetras;
 import util.FormataMonetario;
 
 /**
@@ -53,7 +54,7 @@ public class TelaCadTitulo extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldCliente = new javax.swing.JTextField();
-        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldDescricao = new FormataApenasLetras(50);
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
