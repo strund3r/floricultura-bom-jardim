@@ -1,22 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidade;
 
-/**
- *
- * @author luisf
- */
+import java.sql.Date;
+
 public class Financeiro {
 
+    private int id_cliente;
     private int identificador;
-    private String dataVencimentoTitulo;
+    private Date dataVencimentoTitulo;
     private String nomeCliente;
     private String descricaoTitulo;
     private double valorTitulo;
     private int statusTitulo;
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
 
     public int getIdentificador() {
         return identificador;
@@ -34,11 +36,11 @@ public class Financeiro {
         this.statusTitulo = statusTitulo;
     }
 
-    public String getDataVencimentoTitulo() {
+    public Date getDataVencimentoTitulo() {
         return dataVencimentoTitulo;
     }
 
-    public void setDataVencimentoTitulo(String dataVencimentoTitulo) {
+    public void setDataVencimentoTitulo(Date dataVencimentoTitulo) {
         this.dataVencimentoTitulo = dataVencimentoTitulo;
     }
 
@@ -65,4 +67,5 @@ public class Financeiro {
     public void setValorTitulo(double valorTitulo) {
         this.valorTitulo = valorTitulo;
     }
+
 }

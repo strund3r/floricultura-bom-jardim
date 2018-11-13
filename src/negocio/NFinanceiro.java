@@ -33,10 +33,10 @@ public class NFinanceiro {
         if (parametro.getDescricaoTitulo().isEmpty()) {
             throw new Exception("É necessário informar a descrição.");
         }
-        if (parametro.getDataVencimentoTitulo().isEmpty()) {
+        if (parametro.getDataVencimentoTitulo() == null) {
             throw new Exception("É necessário informar o vencimento.");
         }
-        if (parametro.getStatusTitulo() == 0){
+        if (parametro.getStatusTitulo() <= 0){
             throw new Exception("É necessário informar o status.");
         }
 

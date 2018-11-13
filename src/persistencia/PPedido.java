@@ -23,27 +23,22 @@ import java.util.logging.Logger;
 public class PPedido {
 
     Connection cnn = util.Conexao.getConexao();
-
+    
     public void incluir(Pedido parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " pedido (cliente_id, produto_id, valor) "
-                + " VALUES (?,?, ?)";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+                + " pedido (id_cliente, id_produto, valor) "
+                + " VALUES (?,?,?)";
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         //Trocando os valores da ? por valores recebidos no método
-        prd.setInt(1, parametro.getID());
-        prd.setInt(2, parametro.getId_cliente());
-        prd.setInt(3, parametro.getId_produto());
-        prd.setDouble(4, parametro.getValor());
-//        prd.setInt(4, parametro.getQuantidade());
-//
+        prd.setInt(1, parametro.getId_cliente());
+        prd.setInt(2, parametro.getId_produto());
+        prd.setDouble(3, parametro.getValor());
+
         prd.execute();
         cnn.close();
     }
@@ -53,13 +48,10 @@ public class PPedido {
         try {
             //Cria a instrução sql para a inserção de registros
             String sql = "UPDATE pedido SET"
-                    + " cliente_id = ?,"
-                    + " produto_id = ?, "
-                    + " valor = ?, "
-                    + " WHERE id = ?";
-
-            //Cria a conexao a partir dos métodos da fábrica de conexões
-            Connection cnn = util.Conexao.getConexao();
+                    + " id_cliente = ?,"
+                    + " id_produto = ?, "
+                    + " valor = ?"
+                    + " WHERE identificador = ?";
 
             //cria o procedimento para a execução "contra" o BD
             PreparedStatement prd = cnn.prepareStatement(sql);
@@ -81,10 +73,7 @@ public class PPedido {
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM pedido "
-                + " WHERE id = ?";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+                + " WHERE identificador = ?";
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -98,10 +87,9 @@ public class PPedido {
 
     public Pedido consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT id, cliente_id"
-                + " FROM pedido WHERE id = ?;";
+        String sql = "SELECT identificador, id_cliente, id_produto, valor"
+                + " FROM pedido WHERE identificador = ?";
 
-//        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -111,8 +99,9 @@ public class PPedido {
         Pedido retorno = new Pedido();
 
         if (rs.next()) {
-            retorno.setID(rs.getInt("id"));
-            retorno.setId_cliente(rs.getInt("cliente_id"));
+            retorno.setID(rs.getInt("identificador"));
+            retorno.setId_cliente(rs.getInt("id_cliente"));
+            retorno.setId_produto(rs.getInt("id_produto"));
             retorno.setValor(rs.getDouble("valor"));
         }
         return retorno;
@@ -121,7 +110,6 @@ public class PPedido {
     public List<Pedido> listar() throws SQLException {
 
         String sql = "SELECT * FROM pedido";
-        Connection cnn = util.Conexao.getConexao();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Pedido> retorno = new ArrayList<>();
@@ -129,14 +117,10 @@ public class PPedido {
         while (rs.next()) {
             Pedido pedido = new Pedido();
 
-            pedido.setID(rs.getInt("id"));
-            pedido.setId_cliente(rs.getInt("cliente_id"));
-            pedido.setId_produto(rs.getInt("produto_id"));
+            pedido.setID(rs.getInt("identificador"));
+            pedido.setId_cliente(rs.getInt("id_cliente"));
+            pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
-//            pedido.setQuantidade(rs.getInt("quantidade"));
-//            TipoCliente tpcliente = new TipoCliente();
-//            tpcliente.setIdentificador(rs.getInt("id_tipoClientePF"));
-//            clientePF.setTipoCliente(tpcliente);
 
             retorno.add(pedido);
         }

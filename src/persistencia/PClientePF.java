@@ -6,7 +6,6 @@
 package persistencia;
 
 import entidade.ClientePF;
-import entidade.TipoCliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,12 +26,8 @@ public class PClientePF {
     public void incluir(ClientePF parametro) throws SQLException {
 
         //Cria a instrução sql para a inserção de registros
-        String sql = "INSERT INTO"
-                + " clientepf (nome, cpf, telefone, endereco, email) "
+        String sql = "INSERT INTO clientepf (nome, cpf, telefone, endereco, email) "
                 + " VALUES (?,?,?,?,?)";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -44,7 +38,6 @@ public class PClientePF {
         prd.setString(3, parametro.getTelefone());
         prd.setString(4, parametro.getEndereco());
         prd.setString(5, parametro.getEmail());
-//        prd.setObject(6, parametro.getTipoCliente().getIdentificador());
 
         prd.execute();
         cnn.close();
@@ -56,15 +49,11 @@ public class PClientePF {
             //Cria a instrução sql para a inserção de registros
             String sql = "UPDATE clientepf SET"
                     + " nome = ?,"
-                    + " cpf = ?, "
+                    + " cpf = ?,"
                     + " telefone = ?, "
                     + " endereco = ?, "
                     + " email = ?"
-                    + " id = ?"
-                    + " WHERE id = ?";
-
-            //Cria a conexao a partir dos métodos da fábrica de conexões
-            Connection cnn = util.Conexao.getConexao();
+                    + " WHERE identificador = ?";
 
             //cria o procedimento para a execução "contra" o BD
             PreparedStatement prd = cnn.prepareStatement(sql);
@@ -75,23 +64,20 @@ public class PClientePF {
             prd.setString(3, parametro.getTelefone());
             prd.setString(4, parametro.getEndereco());
             prd.setString(5, parametro.getEmail());
-            prd.setObject(6, parametro.getTipoCliente().getID());
+            prd.setInt(6, parametro.getIdentificador());
 
             prd.execute();
             cnn.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(PClientePF.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 
     public void excluir(int parametro) throws SQLException {
         //Cria a instrução sql para a inserção de registros
         String sql = "DELETE FROM clientepf "
-                + " WHERE id = ?";
-
-        //Cria a conexao a partir dos métodos da fábrica de conexões
-        Connection cnn = util.Conexao.getConexao();
+                + " WHERE identificador = ?";
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -105,10 +91,9 @@ public class PClientePF {
 
     public ClientePF consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT id, nome, cpf, endereco, telefone, email"
-                + " FROM clientePF WHERE id = ?;";
+        String sql = "SELECT identificador, nome, cpf, endereco, telefone, email"
+                + " FROM clientePF WHERE identificador = ?";
 
-//        Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setInt(1, parametro);
@@ -118,13 +103,12 @@ public class PClientePF {
         ClientePF retorno = new ClientePF();
 
         if (rs.next()) {
-            retorno.setID(rs.getInt("id"));
+            retorno.setIdentificador(rs.getInt("identificador"));
             retorno.setNome(rs.getString("nome"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setEmail(rs.getString("email"));
-//            retorno.setTipoCliente(new PTipoCliente().consultar(rs.getInt("id_tipoClientePF")));
         }
         return retorno;
     }
@@ -132,7 +116,6 @@ public class PClientePF {
     public List<ClientePF> listar() throws SQLException {
 
         String sql = "SELECT * FROM clientepf";
-        Connection cnn = util.Conexao.getConexao();
         Statement st = cnn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<ClientePF> retorno = new ArrayList<>();
@@ -140,15 +123,12 @@ public class PClientePF {
         while (rs.next()) {
             ClientePF clientePF = new ClientePF();
 
-            clientePF.setID(rs.getInt("id"));
+            clientePF.setIdentificador(rs.getInt("identificador"));
             clientePF.setNome(rs.getString("nome"));
             clientePF.setCpf(rs.getString("cpf"));
             clientePF.setEndereco(rs.getString("endereco"));
             clientePF.setTelefone(rs.getString("telefone"));
             clientePF.setEmail(rs.getString("email"));
-            TipoCliente tpcliente = new TipoCliente();
-            tpcliente.setID(rs.getInt("id"));
-            clientePF.setTipoCliente(tpcliente);
 
             retorno.add(clientePF);
         }

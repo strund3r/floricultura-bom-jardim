@@ -25,15 +25,19 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCliente
      */
+    int opVoltar = 0;
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
+
     public TelaCliente() {
         initComponents();
         carregarTabela();
     }
 
-    TelaCliente(JDesktopPane jDesktopPrincipal) {
+    TelaCliente(JDesktopPane jDesktopPrincipal, boolean botaoSelecionar, int op) {
         this();
+        jButtonSelecionarCliente.setEnabled(botaoSelecionar);
         this.jDesktopPrincipal = jDesktopPrincipal;
+        opVoltar = op;
     }
 
     private void carregarTabela() {
@@ -53,9 +57,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             for (ClientePF clientePF : negocio.listar()) {
                 Vector<String> conteudo = new Vector();
 
-                conteudo.add(clientePF.getID()+ "");
+                conteudo.add(clientePF.getIdentificador() + "");
                 conteudo.add(clientePF.getNome() + "");
-                conteudo.add(clientePF.getCpf()+ "");
+                conteudo.add(clientePF.getCpf() + "");
                 conteudo.add(clientePF.getTelefone() + "");
                 conteudo.add(clientePF.getEndereco() + "");
                 conteudo.add(clientePF.getEmail() + "");
@@ -63,13 +67,14 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
             tblCliente.setModel(new DefaultTableModel(linhas, cabecalho));
 
+            tblCliente.setAutoCreateRowSorter(true);
             tblCliente.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,6 +99,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        jButtonSelecionarCliente = new javax.swing.JButton();
 
         setTitle("Clientes");
         setPreferredSize(new java.awt.Dimension(580, 390));
@@ -148,6 +154,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonSelecionarCliente.setText("Selecionar");
+        jButtonSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,9 +170,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnVoltar)
-                        .addGap(180, 180, 180)
+                        .addGap(105, 105, 105)
                         .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSelecionarCliente)
+                        .addGap(88, 88, 88)
                         .addComponent(btnNovo))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -173,7 +188,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnNovo)
-                    .addComponent(btnEditar))
+                    .addComponent(btnEditar)
+                    .addComponent(jButtonSelecionarCliente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -181,7 +197,19 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        dispose();
+        try {
+            if (opVoltar == 1) {
+                dispose();
+            } else {
+                TelaCadTitulo telaCadTitulo = new TelaCadTitulo(jDesktopPrincipal);
+                jDesktopPrincipal.add(telaCadTitulo);
+                telaCadTitulo.setLocation(20, 15);
+                telaCadTitulo.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -192,8 +220,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             telaCadCliente.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -202,21 +229,41 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             int linha = tblCliente.getSelectedRow();
             String codigo = tblCliente.getValueAt(linha, 0).toString();
 
-            TelaEditaCliente telaEditaCliente = new TelaEditaCliente(jDesktopPrincipal, codigo);
-            jDesktopPrincipal.add(telaEditaCliente);
-            telaEditaCliente.setLocation(20, 15);
-            telaEditaCliente.setVisible(true);
+            TelaCadCliente telaCadCliente = new TelaCadCliente(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadCliente);
+            telaCadCliente.setLocation(20, 15);
+            telaCadCliente.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void jButtonSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClienteActionPerformed
+
+        try {
+            int linha = tblCliente.getSelectedRow();
+            String codigo = tblCliente.getValueAt(linha, 0).toString();
+
+            TelaCadTitulo telaCadTitulo = new TelaCadTitulo(jDesktopPrincipal, codigo);
+            jDesktopPrincipal.add(telaCadTitulo);
+            telaCadTitulo.setLocation(20, 15);
+            telaCadTitulo.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_jButtonSelecionarClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCliente;

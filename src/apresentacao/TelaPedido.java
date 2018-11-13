@@ -39,34 +39,35 @@ public class TelaPedido extends javax.swing.JInternalFrame {
     }
 
     private void carregarTabela() {
-         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         try {
 
             Vector<String> cabecalho = new Vector();
             cabecalho.add("Código");
             cabecalho.add("Cliente");
-//            cabecalho.add("Quantidade");
             cabecalho.add("Produto");
             cabecalho.add("Valor");
+//            cabecalho.add("quantidade");
 
             NPedido negocioPedido = new NPedido();
             Vector linhas = new Vector();
+
             NProduto negocioProduto = new NProduto();
             NClientePF negocioCliente = new NClientePF();
             
-
             for (Pedido pedido : negocioPedido.listar()) {
                 Vector<String> conteudo = new Vector();
 
                 conteudo.add(pedido.getID() + "");
                 conteudo.add(negocioCliente.consultar(pedido.getId_cliente()).getNome() + "");
-//                conteudo.add(pedido.getQuantidade() + "");
                 conteudo.add(negocioProduto.consultar(pedido.getId_produto()).getNome() + "");
                 conteudo.add(nf.format(pedido.getValor()) + "");
+//                conteudo.add(pedido.getQuantidade()+ "");
+                
                 linhas.add(conteudo);
             }
             tblPedido.setModel(new DefaultTableModel(linhas, cabecalho));
-
+            tblPedido.setAutoCreateRowSorter(true);
             tblPedido.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 
         } catch (Exception e) {
@@ -130,6 +131,11 @@ public class TelaPedido extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,12 +158,12 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
                     .addComponent(btnNovo)
                     .addComponent(btnEditar))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,10 +180,27 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             telaCadPedido.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            int linha = tblPedido.getSelectedRow();
+            String codigo = tblPedido.getValueAt(linha, 0).toString();
+            
+            int op = 1;
+            
+            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal, codigo, op);
+            jDesktopPrincipal.add(telaCadPedido);
+            telaCadPedido.setLocation(20, 15);
+            telaCadPedido.setVisible(true);
+            this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;

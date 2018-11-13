@@ -1,12 +1,12 @@
-
 package apresentacao;
-
 
 import entidade.Financeiro;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFinanceiro;
+import util.Data;
+import util.FormataMonetario;
 
 /**
  *
@@ -14,9 +14,6 @@ import negocio.NFinanceiro;
  */
 public class TelaEditaTitulo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaEditaTitulo
-     */
     JDesktopPane jDesktopPrincipal = new JDesktopPane();
 
     public TelaEditaTitulo() {
@@ -37,11 +34,12 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             NFinanceiro negocio = new NFinanceiro();
             Financeiro titulo = negocio.consultar(Integer.parseInt(codigo));
 
-            jTextFieldCodigo1.setText(titulo.getIdentificador()+ "");
-            jTextFieldDescricao1.setText(titulo.getDescricaoTitulo());
-            jFormattedValor1.setText(titulo.getValorTitulo()+ "");
-            jFormattedVencimento1.setText(titulo.getDataVencimentoTitulo()+ "");
-            jComboBoxStatus1.setSelectedItem(titulo.getStatusTitulo()+ "");
+            jTextFieldCodigo1.setText(titulo.getIdentificador() + "");
+            jTextFieldCliente1.setText(titulo.getNomeCliente() + "");
+            jTextFieldDescricao1.setText(titulo.getDescricaoTitulo()); 
+            jFormattedValor1.setText(titulo.getValorTitulo() + "");
+            jFormattedVencimento1.setText(Data.formatarData(titulo.getDataVencimentoTitulo()) + "");
+            jComboBoxStatus1.setSelectedIndex(titulo.getStatusTitulo());
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -49,14 +47,14 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
     }
 
     private void limpar() {
-        
+
         jFormattedValor1.setText("");
         jFormattedVencimento1.setText("");
         jTextFieldCliente1.setText("");
         jTextFieldCodigo1.setText("");
         jTextFieldDescricao1.setText("");
-        jComboBoxStatus1.setSelectedItem(0);
-        
+        jComboBoxStatus1.setSelectedIndex(0);
+
     }
 
     /**
@@ -77,20 +75,22 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldCodigo1 = new javax.swing.JTextField();
-        jFormattedValor1 = new javax.swing.JFormattedTextField();
         jFormattedVencimento1 = new javax.swing.JFormattedTextField();
         jComboBoxStatus1 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        jFormattedValor1 = new FormataMonetario(10);
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+
+        setTitle("Editar Títulos");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("CLIENTE:");
 
-        jTextFieldDescricao1.setEditable(false);
+        jTextFieldCliente1.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("DESCRIÇÃO:");
@@ -112,56 +112,54 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         });
 
         try {
-            jFormattedValor1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$##.###,##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             jFormattedVencimento1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jComboBoxStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indefinido", "A Pagar", "Pago", "A Receber" }));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("STATUS DO TÍTULO");
+        jLabel13.setText("STATUS DO TÍTULO:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldDescricao1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jFormattedValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jFormattedValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedVencimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedVencimento1)
-                        .addGap(4, 4, 4)))
-                .addContainerGap())
+                        .addComponent(jComboBoxStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldDescricao1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,9 +181,9 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jFormattedValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedVencimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jFormattedValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -197,6 +195,11 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,22 +214,21 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addGap(113, 113, 113)
-                        .addComponent(btnLimpar)
-                        .addGap(127, 127, 127)
-                        .addComponent(btnSalvar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar)
                     .addComponent(btnSalvar)
@@ -277,8 +279,8 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
             titulo.setNomeCliente(jTextFieldCliente1.getText());
             titulo.setDescricaoTitulo(jTextFieldDescricao1.getText());
             titulo.setValorTitulo(Double.parseDouble(jFormattedValor1.getText()));
-            titulo.setDataVencimentoTitulo(jFormattedVencimento1.getText());
-            titulo.setStatusTitulo((int) jComboBoxStatus1.getSelectedItem());
+            titulo.setDataVencimentoTitulo(Data.formatarData(jFormattedVencimento1.getText()));
+            titulo.setStatusTitulo(jComboBoxStatus1.getSelectedIndex());
 
             NFinanceiro negocio = new NFinanceiro();
 
@@ -287,12 +289,15 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
 
             limpar();
 
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void jTextFieldCodigo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigo1ActionPerformed
         // TODO add your handling code here:
@@ -304,7 +309,7 @@ public class TelaEditaTitulo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> jComboBoxStatus1;
-    private javax.swing.JFormattedTextField jFormattedValor1;
+    private javax.swing.JTextField jFormattedValor1;
     private javax.swing.JFormattedTextField jFormattedVencimento1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

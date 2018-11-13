@@ -11,7 +11,7 @@ import java.util.List;
 import persistencia.PPedido;
 
 /**
- *
+ *g
  * @author luisf
  */
 public class NPedido {
@@ -29,9 +29,10 @@ public class NPedido {
         if (parametro.getId_cliente() == 0) {
             throw new Exception("Ë necessário selecionar um cliente!");
         }
-//        if (parametro.getQuantidade() == 0) {
-//            throw new Exception("Ë necessário informar a quantidade!");
+//        if (parametro.getQuantidade() == 0){
+//            throw new Exception("Ë necessário selecionar a quantidade!");
 //        }
+        
         if (parametro.getID() == 0) {
             persistencia.incluir(parametro);
         } else {

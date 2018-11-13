@@ -11,14 +11,14 @@ package entidade;
  */
 public class Cliente {
 
-    private int id;
+    private int identificador;
     private String nome;
     private String telefone;
     private String endereco;
     private String email;
 
-    public Cliente(int id, String nome, String telefone, String endereco, String email) {
-        this.id = id;
+    public Cliente(int identificador, String nome, String telefone, String endereco, String email) {
+        this.identificador = identificador;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
@@ -33,12 +33,12 @@ public class Cliente {
         return nome;
     }
 
-    public int getID() {
-        return id;
+    public int getIdentificador() {
+        return identificador;
     }
 
-    public void setID(int id) {
-        this.id = id;
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
 
     public void setNome(String nome) {

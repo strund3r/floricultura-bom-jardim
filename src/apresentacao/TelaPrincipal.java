@@ -43,28 +43,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 gr.drawImage(image,0,0,getWidth(),getHeight(), this);
             }
         };
-        btnRelatorio = new javax.swing.JButton();
         btnPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
-        btnFornecedor = new javax.swing.JButton();
         btnTitulo = new javax.swing.JButton();
+        jButtonFornecedor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão da Floricultura");
-        setPreferredSize(new java.awt.Dimension(700, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(700, 600));
+        setSize(new java.awt.Dimension(1000, 800));
 
         jDesktopPrincipal.setPreferredSize(new java.awt.Dimension(1200, 1000));
-
-        btnRelatorio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/037cactus.png"))); // NOI18N
-        btnRelatorio.setText("Relatório");
-        btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnPedido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/017plant.png"))); // NOI18N
@@ -102,59 +94,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/038bushes.png"))); // NOI18N
-        btnFornecedor.setText("Fornecedor");
-        btnFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
+        btnTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/030-fertilizer.png"))); // NOI18N
         btnTitulo.setText("Título");
+        btnTitulo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTitulo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTituloActionPerformed(evt);
             }
         });
 
-        jDesktopPrincipal.setLayer(btnRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jButtonFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/041-fruit.png"))); // NOI18N
+        jButtonFornecedor.setText("Fornecedor");
+        jButtonFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFornecedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFornecedorActionPerformed(evt);
+            }
+        });
+
         jDesktopPrincipal.setLayer(btnPedido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPrincipal.setLayer(btnFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPrincipal.setLayer(btnTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPrincipal.setLayer(jButtonFornecedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPrincipalLayout = new javax.swing.GroupLayout(jDesktopPrincipal);
         jDesktopPrincipal.setLayout(jDesktopPrincipalLayout);
         jDesktopPrincipalLayout.setHorizontalGroup(
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPedido)
-                    .addComponent(btnFornecedor))
-                .addGap(43, 43, 43)
-                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(44, 44, 44)
-                .addComponent(btnProduto)
-                .addGap(38, 38, 38)
-                .addComponent(btnRelatorio)
-                .addGap(57, 57, 57))
+            .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCliente)
+                        .addGap(112, 112, 112)
+                        .addComponent(btnProduto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 115, Short.MAX_VALUE)
+                        .addComponent(btnTitulo)
+                        .addGap(100, 100, 100)
+                        .addComponent(jButtonFornecedor)
+                        .addGap(253, 253, 253))))
         );
         jDesktopPrincipalLayout.setVerticalGroup(
             jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPrincipalLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(121, 121, 121)
                 .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRelatorio)
-                    .addComponent(btnPedido)
                     .addComponent(btnCliente)
-                    .addComponent(btnProduto))
-                .addGap(39, 39, 39)
-                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPrincipalLayout.createSequentialGroup()
+                        .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPedido)
+                            .addComponent(btnProduto))
+                        .addGap(46, 46, 46)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jDesktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTitulo)
+                    .addComponent(jButtonFornecedor))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Sobre");
@@ -171,11 +176,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addComponent(jDesktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
 
         pack();
@@ -195,7 +200,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         try {
-            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal);
+            boolean botaoSelecionar = false;
+            
+            TelaCliente telaCliente = new TelaCliente(jDesktopPrincipal, botaoSelecionar, 1);
             jDesktopPrincipal.add(telaCliente);
             telaCliente.setLocation(15, 15);
             telaCliente.setVisible(true);
@@ -237,6 +244,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnTituloActionPerformed
+
+    private void jButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorActionPerformed
+        // TODO add your handling code here:
+        try {
+            TelaFornecedor telaFornecedor = new TelaFornecedor(jDesktopPrincipal);
+            jDesktopPrincipal.add(telaFornecedor);
+            telaFornecedor.setLocation(15, 15);
+            telaFornecedor.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonFornecedorActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -274,11 +294,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
-    private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnProduto;
-    private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnTitulo;
+    private javax.swing.JButton jButtonFornecedor;
     private javax.swing.JDesktopPane jDesktopPrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
