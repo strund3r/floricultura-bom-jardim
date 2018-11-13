@@ -44,7 +44,7 @@ public class PFinanceiro {
                 + " nomecliente = ?,"
                 + " statustitulo = ?,"
                 + " valortitulo = ?,"
-                + "identificadorcliente = ?"
+                + " identificadorcliente = ?"
                 + " WHERE identificador = ?";
 
         //cria o procedimento para a execução "contra" o BD

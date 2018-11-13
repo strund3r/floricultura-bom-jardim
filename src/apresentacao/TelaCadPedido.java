@@ -22,6 +22,7 @@ import javax.swing.table.TableColumn;
 import negocio.NClientePF;
 import negocio.NPedido;
 import negocio.NProduto;
+import util.FormataApenasNumeros;
 
 /**
  *
@@ -52,6 +53,8 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     TelaCadPedido(JDesktopPane jDesktopPrincipal, String codigo) {
         this();
         this.jDesktopPrincipal = jDesktopPrincipal;
+        carregarTabelaCliente();
+        carregarTabelaProduto();
         try {
 
             NPedido negocioPedido = new NPedido();
@@ -67,6 +70,8 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             jTextFieldCodigoProduto.setText(produto.getIdentificador()+ "");
             jTextFieldProduto.setText(produto.getNome()+"");
             jTextFieldValor.setText(pedido.getValor()+"");
+ //           jTextFieldQuantidade.setText(pedido.getQuantidade()+"");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -80,6 +85,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         jTextFieldProduto.setText("");
         jTextFieldCodigoProduto.setText("");
         jTextFieldValor.setText("");
+        jTextFieldQuantidade.setText("");
     }
 
     private void carregarTabelaCliente() {
@@ -128,7 +134,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
                 conteudo.add(produto.getIdentificador() + "");
                 conteudo.add(produto.getNome() + "");
                 conteudo.add(nf.format(produto.getValorVenda()));
-                conteudo.add(produto.getQuantidade() + "");
+//                conteudo.add(produto.getQuantidade() + "");
                 linhas.add(conteudo);
             }
             tblProduto.setModel(new DefaultTableModel(linhas, cabecalho));
@@ -164,6 +170,8 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         jTextFieldCodigoCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldCodigoProduto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldQuantidade = new FormataApenasNumeros(4);
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable(){
@@ -248,6 +256,9 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
 
         jTextFieldCodigoProduto.setEditable(false);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("QUANTIDADE:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -279,7 +290,11 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -309,7 +324,11 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -333,17 +352,11 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -462,6 +475,9 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             if (jTextFieldProduto.getText().isEmpty()) {
                 throw new Exception("E necessário buscar um produto no cadastro.");
             }
+            if(jTextFieldQuantidade.getText().isEmpty()){
+                throw new Exception("E necessário informar a quantidade.");
+            }
             Pedido pedido = new Pedido();
 
             if (!jTextFieldCodigoPedido.getText().isEmpty()) {
@@ -473,6 +489,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
             String valor = jTextFieldValor.getText();
             valor = valor.replace(",", ".");
             pedido.setValor(Double.parseDouble(valor));
+            pedido.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
 
             NPedido negocioPedido = new NPedido();
 
@@ -529,6 +546,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -541,6 +559,7 @@ public class TelaCadPedido extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldCodigoProduto;
     private javax.swing.JTextField jTextFieldNomeCliente;
     private javax.swing.JTextField jTextFieldProduto;
+    private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JTextField jTextFieldValor;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblProduto;
