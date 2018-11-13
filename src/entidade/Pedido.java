@@ -11,13 +11,21 @@ public class Pedido {
     private int id_cliente;
     private int id_produto;
     private double valor;
+    private int quantidade;
 
-    public Pedido(int identificador, int id_cliente, int id_produto) {
+    public Pedido(int identificador, int id_cliente, int id_produto, int quantidade) {
         this.identificador = identificador;
         this.id_cliente = id_cliente;
         this.id_produto = id_produto;
+        this.quantidade = quantidade;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
     public Pedido() {
         
     }

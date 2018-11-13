@@ -50,7 +50,7 @@ public class PPedido {
             String sql = "UPDATE pedido SET"
                     + " id_cliente = ?,"
                     + " id_produto = ?, "
-                    + " valor = ? "
+                    + " valor = ?"
                     + " WHERE identificador = ?";
 
             //cria o procedimento para a execução "contra" o BD

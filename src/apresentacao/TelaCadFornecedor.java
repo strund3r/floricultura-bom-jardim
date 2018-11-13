@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NFornecedor;
+import util.FormataApenasLetras;
 import util.ValidaCNPJ;
 import util.ValidaEmail;
 
@@ -48,7 +49,7 @@ public class TelaCadFornecedor extends javax.swing.JInternalFrame {
         btnSalvar1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldFornecedor = new javax.swing.JTextField();
+        jTextFieldFornecedor = new FormataApenasLetras();
         jTextFieldEndereco = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();

@@ -40,7 +40,7 @@ public class PFornecedor {
                 + " nome = ?,"
                 + " endereco = ?,"
                 + " telefone = ?,"
-                + " cnpj = ?"
+                + " cnpj = ?,"
                 + " email = ?"
                 + " WHERE identificador = ?";
 
@@ -52,7 +52,8 @@ public class PFornecedor {
         prd.setString(2, parametro.getEndereco());
         prd.setString(3, parametro.getTelefone());
         prd.setString(4, parametro.getCnpj());
-        prd.setString(5, parametro.getEmail());;
+        prd.setString(5, parametro.getEmail());
+        prd.setInt(6, parametro.getIdentificador());
 
         prd.execute();
         cnn.close();
