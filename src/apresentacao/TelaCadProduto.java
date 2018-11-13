@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NProduto;
-import util.FormataJTextField;
+import util.FormataApenasLetras;
+import util.FormataMonetario;
 
 public class TelaCadProduto extends javax.swing.JInternalFrame {
 
@@ -61,15 +62,15 @@ public class TelaCadProduto extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldNome = new FormataApenasLetras(50);
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldDescricao = new FormataApenasLetras(50);
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldCusto = new javax.swing.JTextField();
+        jTextFieldCusto = new FormataMonetario(10);
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldValorVenda = new javax.swing.JTextField();
+        jTextFieldValorVenda = new FormataMonetario(10);
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldQuantidade = new FormataJTextField(3);
+        jTextFieldQuantidade = new util.FormataApenasNumeros(3);
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
