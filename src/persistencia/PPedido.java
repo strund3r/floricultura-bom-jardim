@@ -28,8 +28,8 @@ public class PPedido {
 
         //Cria a instrução sql para a inserção de registros
         String sql = "INSERT INTO"
-                + " pedido (id_cliente, id_produto, valor, quantidade) "
-                + " VALUES (?,?,?,?)";
+                + " pedido (id_cliente, id_produto, valor) "
+                + " VALUES (?,?,?)";
 
         //cria o procedimento para a execução "contra" o BD
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -38,7 +38,6 @@ public class PPedido {
         prd.setInt(1, parametro.getId_cliente());
         prd.setInt(2, parametro.getId_produto());
         prd.setDouble(3, parametro.getValor());
-        prd.setInt(4, parametro.getQuantidade());
 
         prd.execute();
         cnn.close();
@@ -51,8 +50,7 @@ public class PPedido {
             String sql = "UPDATE pedido SET"
                     + " id_cliente = ?,"
                     + " id_produto = ?, "
-                    + " valor = ?,"
-                    + " quantidade = ?"
+                    + " valor = ?"
                     + " WHERE identificador = ?";
 
             //cria o procedimento para a execução "contra" o BD
@@ -63,7 +61,6 @@ public class PPedido {
             prd.setInt(2, parametro.getId_produto());
             prd.setInt(3, parametro.getID());
             prd.setDouble(4, parametro.getValor());
-            prd.setInt(5, parametro.getQuantidade());
 
             prd.execute();
             cnn.close();
@@ -90,7 +87,7 @@ public class PPedido {
 
     public Pedido consultar(int parametro) throws SQLException {
 
-        String sql = "SELECT identificador, id_cliente, id_produto, valor, quantidade"
+        String sql = "SELECT identificador, id_cliente, id_produto, valor"
                 + " FROM pedido WHERE identificador = ?";
 
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -106,7 +103,6 @@ public class PPedido {
             retorno.setId_cliente(rs.getInt("id_cliente"));
             retorno.setId_produto(rs.getInt("id_produto"));
             retorno.setValor(rs.getDouble("valor"));
-            retorno.setQuantidade(rs.getInt("quantidade"));
         }
         return retorno;
     }
@@ -125,7 +121,6 @@ public class PPedido {
             pedido.setId_cliente(rs.getInt("id_cliente"));
             pedido.setId_produto(rs.getInt("id_produto"));
             pedido.setValor(rs.getDouble("valor"));
-            pedido.setQuantidade(rs.getInt("quantidade"));
 
             retorno.add(pedido);
         }

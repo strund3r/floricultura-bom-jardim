@@ -47,7 +47,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             cabecalho.add("Cliente");
             cabecalho.add("Produto");
             cabecalho.add("Valor");
-            cabecalho.add("quantidade");
+//            cabecalho.add("quantidade");
 
             NPedido negocioPedido = new NPedido();
             Vector linhas = new Vector();
@@ -62,7 +62,7 @@ public class TelaPedido extends javax.swing.JInternalFrame {
                 conteudo.add(negocioCliente.consultar(pedido.getId_cliente()).getNome() + "");
                 conteudo.add(negocioProduto.consultar(pedido.getId_produto()).getNome() + "");
                 conteudo.add(nf.format(pedido.getValor()) + "");
-                conteudo.add(pedido.getQuantidade()+ "");
+//                conteudo.add(pedido.getQuantidade()+ "");
                 
                 linhas.add(conteudo);
             }
@@ -189,7 +189,9 @@ public class TelaPedido extends javax.swing.JInternalFrame {
             int linha = tblPedido.getSelectedRow();
             String codigo = tblPedido.getValueAt(linha, 0).toString();
             
-            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal, codigo);
+            int op = 1;
+            
+            TelaCadPedido telaCadPedido = new TelaCadPedido(jDesktopPrincipal, codigo, op);
             jDesktopPrincipal.add(telaCadPedido);
             telaCadPedido.setLocation(20, 15);
             telaCadPedido.setVisible(true);
